@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">AnotherMonitor</string>
+    <string name="google_play_app_site">https://play.google.com/store/apps/details?id=org.anothermonitor</string>
+    <string name="anim_time">100</string>
+	<string name="notify_read">AnotherMonitor is reading values</string>
+	<string name="notify_read2">Reading values in the background</string>
+	<string name="notify_record">AnotherMonitor is recording values</string>
+	<string name="notify_record2">Recording values in the background</string>
+	<string name="notify_toast_saved">saved in the folder \'AnotherMonitor\'.</string>
+	<string name="notify_toast_error">An error happened when saving the CSV file:</string>
+	<string name="notify_toast_error_2">It hasn\'t been possible to start recording:</string>
+    <string name="w_main_choose_process">Choose other process(es)</string>
+    <string name="w_main_processes">Processes</string>
+    <string name="w_main_memory">Memory</string>
+    <string name="w_main_hide">Hide</string>
+    <string name="w_main_remove_all">Remove All</string>
+    <string name="w_main_feedback_title">Just one second ;)</string>
+    <string name="w_main_feedback_text">You\'ve been using AnotherMonitor for a while.
+        \n\nYour feedback is invaluable to improve the app. Would you like to rate the app on Google Play? (It\'s 30 seconds).</string>
+    <string name="w_main_feedback_yes">Yes</string>
+    <string name="w_main_feedback_done">I\'ve already done it</string>
+    <string name="w_main_feedback_done_thanks">Thanks for your rate!</string>
+    <string name="w_main_feedback_no">No</string>
+    <string name="w_main_feedback_no_remind">You\'ll be reminded in three months.</string>
+    <string name="w_main_welcome">Welcome!</string>
+    <string name="w_main_hint_title">FYI</string>
+    <string name="w_main_hint">Enable and disable parameters shown on the graph by pressing their label.
+        \n\nYou can open the Settings panel by clicking the graph.</string>
+    <string name="w_main_mp_button_text">Alright</string>
+    <string name="w_processes_dead">DEAD</string>
+    <string name="w_processes_dead_notification">Process dead</string>
+    <string name="w_processes_title">Processes</string>
+    <string name="w_processes_empty">Ouch! There was some problem when retrieving the system processes.</string>
+    <string name="w_processes_first_time">You can remove a process from the list by performing a long click on its label.</string>
+    <string name="w_help_title">Some explanations?</string>
+    <string name="w_help_text">In the main window you can open the Settings panel by pressing the graph.
+        There you can set the \'Read interval\', the \'Update interval\' and the \'Graphic interval width\' settings.
+        The \'Real interval\' setting cannot be modified when the app is recording.
+        \n\n<big><b>Processes</b></big>
+        \n\nYou can see the total CPU and memory usage of all processes currently running on the system.
+		If the device has more than one core the CPU usage will be the sume of all cores\' CPU usage.
+		Add processes by pressing \'Choose other process(es)\' button.
+        AnotherMonitor process will always be shown in the list. Switch between CPU and memory usage by pressing the \'Memory\' button.
+        The memory monitored and shown by AnotherMonitor is the Total Private Dirty.
+        If Android kills a process due to low memory
+        or the process finishes itself, \'DEAD\' will be shown.
+        You can disable or re-enable showing the process on the graph by pressing its label.
+        You can remove the process from the list by performing a long press on its label.
+        \n\nIn order to get CPU usage the app does not make use of the \'Top\' Linux command but instead it parses the
+        \'/proc/stat\' file and does calculations with the user and system time.
+        \n\nMore info about CPU usage in Linux:
+        \n- http://stackoverflow.com/questions/1420426/calculating-cpu-usage-of-a-process-in-linux
+        \n\n<big><b>Memory</b></big>
+        \n\nAnotherMonitor shows on screen the device\'s most relevant memory parameters. They are both parameterts related with Linux and Android:
+        \n\n<b>Mem used</b>: the memory which is already in use by the system.
+        \n\n<b>Mem available</b>: the available memory on the system. This number should not be considered absolute: due to the nature of
+        the kernel, a significant portion of this memory is actually in use and needed for the overall system to run well. <b>Mem available</b> is
+        the sum of <b>MemFree</b> and <b>Cached</b>.
+        \n\n<b>MemFree</b>: The sum of <b>LowFree</b> plus <b>HighFree</b> (not shown on the graph since they\'re not relevant in terms of app developing).
+        By default this parameter is disabled on the graph.
+        \n\n<b>Cached</b>: in-memory cache for files read from the disk (the pagecache). By default this parameter is disabled on the graph.
+        \n\n<b>Threshold</b>: The threshold of <b>Mem available</b> at which Android considers memory to be low and start killing background services and other
+        non-extraneous processes. This is a parameter exclusive for Android not present on Linux.
+        \n\nFind more information about memory:
+        \n<b>In Android:</b>
+                  \n- http://developer.android.com/tools/debugging/debugging-memory.html
+                  \n- http://developer.android.com/reference/android/app/ActivityManager.MemoryInfo.html
+        \n<b>In Linux:</b>
+                  \n- https://en.wikipedia.org/wiki/Procfs
+                  \n- https://www.kernel.org/doc/Documentation/filesystems/proc.txt
+        \n\n<big><b>Recording</b></big>
+        \n\nAnotherMonitor can record in a CSV file the CPU usage and memory values for later usage and processing in a spreadsheet program.
+        Just press the circular red button on the main window to start recording. Then you can select and add other app process
+        to the graph by pressing the \'Choose other procesess(es)\' button and then bring the app to the foreground. AnotherMonitor will record the CPU usage of that app while it is being used.
+        To stop recording just press the white square icon or press the \'Stop and save\' action button from the AnotherMonitor entry in the system bar.
+        Values will be recorded at the pace indicated in the \'Read interval\' setting of the \'Settings\' panel.
+        \n\nWhen recording, AnotherMonitor writes all the CPU usage and memory parameters to disk no matter whether they are being shown on the graph or not.
+        \n\nThe recorded files are saved on the SD space of your device in the \'AnotherMonitor\' folder.</string>
+	<string name="menu_record">Record</string>
+	<string name="menu_record_description">Starts recording memory and CPU parameters in the background</string>
+	<string name="menu_record_stop_description">Stops recording and saves CSV file</string>
+	<string name="menu_stop_record">Stop and save</string>
+	<string name="menu_settings_description">Opens Settings panel</string>
+	<string name="menu_help">Help</string>
+	<string name="menu_about">About</string>
+	<string name="menu_close">Close</string>
+	<string name="button_ok">OK</string>
+	<string name="button_cancel">Cancel</string>
+	<string name="button_reset">Reset to Defaults</string>
+	<string name="graphic_update_interval">Update interval</string>
+	<string name="graphic_paused">Graphic paused</string>
+	<string name="graphic_recording">Recording&#8230;</string>
+	<string name="interval_read">Read interval:</string>
+	<string name="interval_update">Update interval:</string>
+	<string name="interval_width">Graphic interval width:</string>
+	<string name="tab_main">Main</string>
+	<string name="tab_main_text">Set the frequency which memory and CPU parameters are read, the frequency the graphic and labels are updated and the graphic interval width.
+	    \n\nThe update interval must be equal or higher than the read interval. If the read interval is modified the graphic will be reset.</string> <!--  The higher values, the less resources consumed. -->
+	<string name="tab_main_alert_text">The update interval must be equal or higher than the	read interval. Change these intervals or press \'Reset to Defaults\'.</string>
+	<string name="tab_main_alert_title">Hey!</string>
+	<string name="tab_main_alert_ok">OK</string>
+	<string name="tab_show">Show/Record</string>
+	<string name="tab_show_text">Select the parameters you want to be shown on the graphic.
+	    These parameters will be the same that will be recorded when the recording mode is on.
+	    \n\nThe generated CSV files are saved on the \'data/data/org.anothermonitor/files\' folder.
+	    \n\nYou can also check/uncheck these parameters stright from the main window by pushing on the name of the parameters.</string>
+	<string name="tab_show_select_all">Select All</string>
+	<string name="tab_show_unselect_all">Unselect All</string>
+	<string name="read_interval_text">Read parameters every:</string>
+	<string name="read_interval_prompt">Read interval (s):</string>
+	<string-array name="read_interval_array">
+		<item>0.5 s</item>
+		<item>1 s</item>
+		<item>2 s</item>
+		<item>4 s</item>
+	</string-array>
+	<string name="update_interval_text">Update labels and graphic every:</string>
+	<string name="update_interval_prompt">Update interval (s):</string>
+	<string-array name="update_interval_array">
+		<item>1 s</item>
+		<item>2 s</item>
+		<item>4 s</item>
+		<item>8 s</item>
+	</string-array>
+	<string name="width_interval_text">Graphic interval width:</string>
+	<string name="width_interval_prompt">Width interval (dp):</string>
+	<string-array name="width_interval_array">
+		<item>1 dp</item>
+		<item>2 dp</item>
+		<item>5 dp</item>
+		<item>10 dp</item>
+	</string-array>
+	<string name="p_cpuusage">CPU usage</string>
+	<string name="p_cputotalusage">Total CPU usage</string>
+	<string name="p_cpuanothermonitor">AnotherMonitor</string>
+	<string name="p_memtotal">Memory</string>
+	<string name="p_memused">Mem used</string>
+	<string name="p_memavailable">Mem available</string>
+	<string name="p_memfree">MemFree</string>
+	<string name="p_cached">Cached</string>
+	<string name="p_threshold">Threshold</string>
+	<string name="p_kb">- kB</string>
+	<string name="p_percentage">-%</string>
+	<string name="about_title">About</string>
+	<string name="about_text_title">
+		<big><b>AnotherMonitor</b> v3.0.2</big>
+		\n© 2010&#8211;2015 Antonio Redondo
+		\nhttp://antonioredondo.com</string>
+<!-- 	<string name="about_text_title">
+		<big><b>AnotherMonitor</b> v1.1.0</big>
+		\n© 2010&#8211;2014 Antonio Redondo
+		\nhttp://antonioredondo.com
+		\n\nPublished under the
+		\nGNU General Public License v3</string> -->
+	<string name="about_text">
+		\n\nAnotherMonitor monitors and records the CPU usage and memory parameters of Android devices.
+		\n\nChuck Norris approves this application.
+	</string>
+    <string name="about_feedback_text">Write or edit your review</string>
+    <string name="about_feedback_button">AnotherMonitor on Google Play</string>
+    <string name="about_gnugpl_text">GNU General Public License v3</string>
+    <string name="about_gnugpl_link">https://gnu.org/licenses/gpl.html</string>
+    <string name="cd_paramter_status_icon">Parameter status icon</string>
+    <string name="content_description_logo_app">Logo app</string>
+</resources>

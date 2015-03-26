@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <!-- http://stackoverflow.com/questions/20781014/translucent-system-bars-and-content-margin-in-kitkat -->
+    <style name="mTheme" parent="android:Theme.Holo.NoActionBar" >
+        <item name="android:windowTranslucentStatus">true</item>
+		<item name="android:windowTranslucentNavigation">true</item>
+	</style>
+    
+</resources>

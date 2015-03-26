@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="@string/tab_main_text"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginRight="8sp"
+                android:gravity="center_vertical"
+                android:text="@string/read_interval_text"
+            	android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/SRead"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:minWidth="100sp"
+                android:prompt="@string/width_interval_prompt"
+            	android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginRight="8sp"
+                android:gravity="center_vertical"
+                android:text="@string/update_interval_text"
+            	android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/SUpdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:minWidth="100sp"
+                android:prompt="@string/update_interval_prompt" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:layout_marginRight="8sp"
+                android:gravity="center_vertical"
+                android:text="@string/width_interval_text"
+            	android:textSize="16sp" />
+
+            <Spinner
+                android:id="@+id/SWidth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:minWidth="100sp"
+                android:prompt="@string/width_interval_prompt" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/BReset"
+            android:layout_width="200sp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/button_reset" />
+    </LinearLayout>
+
+</ScrollView>

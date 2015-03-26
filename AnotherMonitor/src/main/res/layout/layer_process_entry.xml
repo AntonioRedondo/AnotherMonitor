@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ParameterRow" >
+
+    <ImageView
+    	style="@style/ParameterStatusIcon" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical" />
+    
+	<LinearLayout
+	    style="@style/FirstColumn"
+	  	android:orientation="vertical" >
+
+	    <TextView
+	        android:id="@+id/TVpAppName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="16sp"
+			android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/TVpName"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:textSize="13sp"
+			android:textColor="@color/VeryDarkGray" />
+	    
+	</LinearLayout>
+    
+	<LinearLayout
+	    style="@style/SecondColumn"
+	  	android:orientation="vertical"  >
+
+	    <TextView
+	        android:id="@+id/TVpPercentage"
+			android:layout_width="55dp"
+			android:layout_height="wrap_content"
+			android:layout_gravity="bottom|right"
+			android:gravity="right"
+			android:textSize="16sp"
+			android:text="@string/p_percentage" />
+	
+	    <TextView
+	        android:id="@+id/TVpAbsolute"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:gravity="right"
+			android:textSize="13sp"
+			android:textColor="@color/VeryDarkGray" />
+	    
+	</LinearLayout>
+    
+</LinearLayout>

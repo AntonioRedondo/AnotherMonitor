@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- http://stackoverflow.com/questions/1700099/android-how-to-create-a-background-from-pattern -->
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/subtlepatterns_escheresque_ste" 
+    android:tileMode="repeat" /> 

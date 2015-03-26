@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:background="@drawable/bg_about" >
+
+        <LinearLayout
+    		android:id="@+id/LParent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:orientation="vertical" >
+	
+		    <TextView
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"
+		        android:paddingTop="30dp"
+		        android:paddingLeft="25dp"
+		        android:text="@string/w_help_title"
+		        android:textColor="@color/titleHelp"
+		        android:textSize="32sp" />
+
+            <TextView
+    			android:id="@+id/TVHelpText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:autoLink="none"
+                android:linksClickable="true"
+                android:maxWidth="450dp"
+                android:selectAllOnFocus="false"
+                android:text="@string/w_help_text"
+            	android:textSize="16sp"
+            	android:textColor="@color/White" />
+        </LinearLayout>
+        
+    </ScrollView>
+		    
+	<FrameLayout
+	    android:id="@+id/LNavigationBar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+    	android:layout_gravity="bottom"
+	    android:background="@drawable/gradient_nb"
+	    android:visibility="gone" />
+
+</merge>

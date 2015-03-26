@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android" >
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:orientation="vertical"
+	    android:background="#181818" > <!-- @drawable/bg_preferences -->
+	
+	    <LinearLayout
+	        android:id="@+id/LTabs"
+	        android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:gravity="center"
+	        android:orientation="horizontal"
+	        android:background="#99010101" > <!-- #99181818 -->
+	
+	        <TextView
+	            style="@style/TVTab"
+	            android:id="@+id/TVTabMain"
+	            android:text="@string/tab_main" />
+		
+		    <FrameLayout
+		        android:layout_width="1dp"
+		        android:layout_height="40dp"
+		        android:background="@color/gray" />
+	
+	        <TextView
+	            style="@style/TVTab"
+	            android:id="@+id/TVTabShowRecord"
+	            android:text="@string/tab_show" />
+	    </LinearLayout>
+		
+	    <FrameLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="2dp"
+	        android:background="@color/gray" />
+	
+	    <android.support.v4.view.ViewPager
+	        android:id="@+id/VP"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />
+	
+	</LinearLayout>
+		    
+	<FrameLayout
+	    android:id="@+id/LNavigationBar"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+    	android:layout_gravity="bottom"
+	    android:background="@drawable/gradient_nb"
+	    android:visibility="gone" />
+
+</merge>

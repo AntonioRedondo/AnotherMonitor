@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <style name="mTheme" parent="android:Theme.Holo.NoActionBar" />
+    
+    
+    
+    
+    
+	<style name="LFeedbackLayerWidth">
+		<item name="android:layout_width">300dp</item>
+	</style>
+    
+    
+    
+    
+    
+	<style name="Animations" />
+	
+	<style name="Animations.PopDownMenu">
+		<item name="@android:windowEnterAnimation">@anim/grow_from_topright_to_bottomleft</item>
+		<item name="@android:windowExitAnimation">@anim/shrink_from_bottomleft_to_topright</item>
+	</style>
+	
+	<style name="Animations.PopDownMenuBottom">
+		<item name="@android:windowEnterAnimation">@anim/grow_from_bottomcentre_to_topcentre</item>
+		<item name="@android:windowExitAnimation">@anim/shrink_from_topcentre_to_bottomcentre</item>
+	</style>
+    
+    
+    
+    
+	
+	<style name="MainWindowArrangement">
+		<item name="android:orientation">vertical</item>
+	</style>
+	
+	<style name="ViewGraphicTopShadow">
+		<item name="android:visibility">gone</item>
+	</style>
+	
+	<style name="ParameterRow">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:paddingTop">5dp</item>
+		<item name="android:paddingBottom">5dp</item>
+		<item name="android:paddingLeft">17dp</item>
+		<item name="android:paddingRight">21dp</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:background">@drawable/bg_parameter_row</item>
+	</style>
+	
+	<style name="ParameterStatusIcon">
+		<item name="android:layout_width">15dp</item>
+		<item name="android:layout_height">15dp</item>
+		<item name="android:layout_marginLeft">5dp</item>
+		<item name="android:src">@drawable/icon_play</item>
+		<item name="android:contentDescription">@string/cd_paramter_status_icon</item>
+	</style>
+	
+	<style name="FirstColumn">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginLeft">8dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:textStyle">bold</item>
+		<!-- <item name="android:shadowColor">@color/VeryDarkGray</item>
+		<item name="android:shadowDx">1.0</item>
+		<item name="android:shadowDy">1.0</item>
+		<item name="android:shadowRadius">4.0</item> -->
+	</style>
+	
+	<style name="SecondColumn">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:gravity">right</item>
+		<item name="android:text">@string/p_kb</item>
+		<item name="android:textSize">16sp</item>
+	</style>
+	
+	<style name="ThirdColumn">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:minWidth">60dp</item>
+		<item name="android:gravity">right</item>
+		<item name="android:text">@string/p_percentage</item>
+		<item name="android:textSize">16sp</item>
+	</style>
+	
+	
+	
+	
+	
+	<style name="MenuEntry">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">47dp</item>
+		<item name="android:paddingLeft">12dp</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:orientation">horizontal</item>
+		<item name="android:background">@drawable/button_menu_entry</item>
+	</style>
+	
+	<style name="MenuEntryIcon">
+		<item name="android:layout_width">30dp</item>
+		<item name="android:layout_height">30dp</item>
+		<item name="android:alpha">0.4</item>
+	</style>
+	
+	<style name="MenuEntryText">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+		<item name="android:paddingLeft">10dp</item>
+		<item name="android:gravity">center_vertical</item>
+		<item name="android:textSize">18sp</item>
+		<item name="android:textColor">@color/VeryDarkGray</item>
+	</style>
+	
+	
+	
+	
+	
+	<style name="TVTab">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">60dp</item>
+		<item name="android:layout_weight">1</item>
+		<item name="android:gravity">center</item>
+		<item name="android:textSize">16sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:background">@drawable/gradient_tab_selected</item>
+	</style>
+	
+	<style name="CBParameters">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">40dp</item>
+	</style>
+	
+	
+	
+	
+	
+	<style name="TVInterval">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">14dp</item>
+		<item name="android:textColor">@color/white</item>
+	</style>
+	
+	<style name="SBInterval">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:layout_marginTop">4dp</item>
+		<item name="android:max">3</item>
+	</style>
+	
+</resources>

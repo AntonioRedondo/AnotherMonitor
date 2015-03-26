@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MainWindowArrangement"
+    android:id="@+id/LFeedback"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+	android:layout_gravity="bottom|center"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:clickable="true"
+	android:background="@drawable/bg_menu_white"
+	android:alpha="0" >
+	
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:paddingLeft="20dp"
+        android:text="@string/w_main_feedback_title"
+        android:textColor="@color/bgSettings"
+        android:textSize="29sp" />
+	
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:text="@string/w_main_feedback_text"
+        android:textColor="@color/VeryDarkGray" />
+	
+    <Button
+        android:id="@+id/BFeedbackYes"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/w_main_feedback_yes"
+        android:textSize="17sp"
+	    android:textAllCaps="false" />
+	
+    <Button
+        android:id="@+id/BFeedbackDone"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/w_main_feedback_done"
+        android:textSize="17sp"
+	    android:textAllCaps="false" />
+	
+    <Button
+        android:id="@+id/BFeedbackNo"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="20dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:text="@string/w_main_feedback_no"
+        android:textSize="17sp"
+	    android:textAllCaps="false" />
+
+</LinearLayout>

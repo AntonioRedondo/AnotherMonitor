@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/tab_show_text"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15sp"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:id="@+id/BSelectAllDraw"
+                android:layout_width="130sp"
+                android:layout_height="fill_parent"
+                android:layout_marginRight="10dp"
+                android:text="@string/tab_show_select_all" />
+
+            <Button
+                android:id="@+id/BUnselectAllDraw"
+                android:layout_width="130sp"
+                android:layout_height="fill_parent"
+                android:text="@string/tab_show_unselect_all" />
+        </LinearLayout>
+
+        <CheckBox
+            style="@style/CBParameters"
+            android:id="@+id/CBCpuTotalD"
+            android:layout_marginTop="15dp"
+            android:text="@string/p_cputotalusage" />
+
+        <CheckBox
+            style="@style/CBParameters"
+            android:id="@+id/CBCpuAMD"
+            android:text="@string/p_cpuanothermonitor" />
+
+        <CheckBox
+            style="@style/CBParameters"
+            android:id="@+id/CBMemFreeD"
+            android:layout_marginTop="20dp"
+            android:text="@string/p_memfree" />
+
+        <CheckBox
+            style="@style/CBParameters"
+            android:id="@+id/CBCachedD"
+            android:text="@string/p_cached" />
+    </LinearLayout>
+
+</ScrollView>

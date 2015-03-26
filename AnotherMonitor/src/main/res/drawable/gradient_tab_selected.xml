@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item
+          android:state_pressed="true">
+        <shape>
+		    <gradient
+		        android:type="linear"
+				android:startColor="@color/buttonMenu1"
+				android:centerColor="@color/buttonMenu1c"
+				android:endColor="@color/buttonMenu1b"
+		        android:angle="90"/>
+		</shape>
+	</item>
+    
+    <item
+          android:state_activated="true">
+        <shape>
+		    <gradient
+		        android:type="linear"
+				android:startColor="@color/buttonMenu2"
+				android:centerColor="@color/buttonMenu1c"
+				android:endColor="@color/buttonMenu1b"
+		        android:angle="90"/>
+		</shape>
+	</item>
+    
+<!--     <item
+          android:state_pressed="true">
+        <shape>
+		    <gradient
+		        android:type="radial"
+		        android:gradientRadius="80"
+		        android:centerY="1"
+				android:startColor="@color/buttonMenu1"
+				android:centerColor="@color/buttonMenu1c"
+				android:endColor="@color/buttonMenu1b"
+		        android:angle="270"/>
+		</shape>
+	</item>
+    
+    <item
+          android:state_activated="true">
+        <shape>
+		    <gradient
+		        android:type="radial"
+		        android:gradientRadius="120"
+		        android:centerY="1"
+				android:startColor="@color/buttonMenu2"
+				android:centerColor="@color/buttonMenu1c"
+				android:endColor="@color/buttonMenu1b"
+		        android:angle="0"/>
+		</shape>
+	</item> -->
+
+</selector>
