@@ -14,19 +14,21 @@ The app is released on Google Play: https://play.google.com/store/apps/details?i
 
 ## Details
 
-AnotherMonitor is intended for developers interested on knowing the device resources state.
+AnotherMonitor is ideal to find out the device CPU and memory resources state in real time.
 
 It has 2 main options:
-- It shows a graphic and several text labels wherein the values of the CPU usage and memory are updated in real time;
-- It can record in a CSV file the read values for a later usage and process in a spreadsheet program.
+- It shows a graphic and several text labels wherein the values of the CPU and memory usage are updated every 0.5, 1, 2 or 4 seconds.
+- It can record on a CSV file the read values for a later usage and process on a spreadsheet program.
 
-The app can be run in background. Then, the second option is specially interesting since, in background, AnotherMonitor consumes little resources and can monitor and record the memory and CPU usage values that other applications on foreground are using.
+The app can run in the background. Then, the second option is specially interesting since, in the background, AnotherMonitor consumes little resources and can monitor and record the CPU and memory values that other applications are using in the foreground.
 
-In order to get CPU usage the app does not make use of the 'Top' command from Linux but instead it parses the '/proc/stat' file and does calculations with the user and system time.
+The app can be closed, and the recording of values can be started from the buttons shown in the system bar.
+
+In order to get the CPU usage the app does not make use of the 'Top' command from Linux but instead it parses the '/proc/stat' file and work the calculatios out with the user and system time.
 
 ## Resolving dependencies
 
-AnotherMonitor makes use of 3rd party libraries to carry out different tasks:
+AnotherMonitor makes use of some external libraries to carry out different tasks:
 -  [Android v4 Support Libraries](http://developer.android.com/tools/support-library/features.html#v4).
 
 These all dependencies are already included and configured on the Gradle files.
