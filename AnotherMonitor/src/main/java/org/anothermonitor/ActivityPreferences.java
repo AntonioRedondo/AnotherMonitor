@@ -1,6 +1,9 @@
-/* Copyright 2010 Antonio Redondo Lopez.
- * Source code published under the GNU GPL v3.
- * For further information visit http://code.google.com/p/anothermonitor
+/*
+ * 2010-2015 (C) Antonio Redondo
+ * http://antonioredondo.com
+ *
+ * Code under the terms of the GNU General Public License v3.
+ *
  */
 
 package org.anothermonitor;
@@ -39,25 +42,7 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 
 /**
- * This class is intended to allow the user configuring some parameters of
- * AnotherMonitor. It is the typical preferences window of any program. It shows
- * (whereby an activity) a window with 4 tabs: Main, Appearance, Read/record and
- * Draw. The Main tab allows configure the 3 most important parameters of the
- * program, the Read interval, the Update interval and the Width interval. The
- * Appearance tab allows change the color of the graphic background and the
- * graphic lines. Finally, the Read/record and Draw tabs allow to select or
- * unselect the different values to be read/record and draw, respectively.
- * <p>
- * When the button OK is pressed the activity connect to the AnReaderService
- * service and it removes all the elements of all the read values vectors if the
- * Read interval changes or removes all the elements of some read value vector
- * if it is unselected.
- * <p>
- * This activity could have used the classes of the android.preference packet to
- * build the GUI, but I think the current preferences window is a little more
- * intuitive and/or easy of understand. Anyway, it is not an important aspect.
- * 
- * @version 1.0.0
+ * Class not used. Preferences have been moved to the app bottom slide menu.
  */
 
 public class ActivityPreferences extends Activity {

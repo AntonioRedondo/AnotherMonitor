@@ -1,5 +1,12 @@
-package org.anothermonitor;
+/*
+ * 2010-2015 (C) Antonio Redondo
+ * http://antonioredondo.com
+ *
+ * Code under the terms of the GNU General Public License v3.
+ *
+ */
 
+package org.anothermonitor;
 
 class C {
 
