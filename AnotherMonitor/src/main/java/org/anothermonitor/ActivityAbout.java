@@ -10,8 +10,7 @@ package org.anothermonitor;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
-import android.content.Intent;
+import android.content.*;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -26,6 +25,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ActivityAbout extends Activity {
+
+	private BroadcastReceiver receiverFinish = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			finish();
+		}
+	};
 	
 	@SuppressLint("InlinedApi")
 	@Override
@@ -74,5 +80,25 @@ public class ActivityAbout extends Activity {
 				}
 			}
 		});
+	}
+
+
+
+
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		registerReceiver(receiverFinish, new IntentFilter(C.actionFinishActivity));
+	}
+
+
+
+
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiverFinish);
 	}
 }

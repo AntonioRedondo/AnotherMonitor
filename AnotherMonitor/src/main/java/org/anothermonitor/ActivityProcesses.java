@@ -20,8 +20,10 @@ import java.util.Map;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
@@ -50,7 +52,14 @@ public class ActivityProcesses extends Activity {
 									   mListSelected = new ArrayList<Map<String, Object>>();
 	private SimpleAdapter mSA;
 	private ListView mLV;
-	
+
+	private BroadcastReceiver receiverFinish = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			finish();
+		}
+	};
+
 	
 	
 	
@@ -150,16 +159,6 @@ public class ActivityProcesses extends Activity {
 				mLV.setVisibility(View.GONE);
 				findViewById(R.id.LProcessesEmpty).setVisibility(View.VISIBLE);
 			}
-
-            findViewById(R.id.BOK).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mListSelected.size() != 0) {
-                        setResult(1, new Intent(ActivityProcesses.this, ActivityMain.class).putExtra(C.listSelected, (Serializable) mListSelected));
-                        finish();
-                    }
-                }
-            });
 		}
 		
 		
@@ -194,6 +193,18 @@ public class ActivityProcesses extends Activity {
 				mSA.notifyDataSetChanged();
 			}
 		});
+
+        findViewById(R.id.BOK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListSelected.size() != 0) {
+                    setResult(1, new Intent(ActivityProcesses.this, ActivityMain.class).putExtra(C.listSelected, (Serializable) mListSelected));
+                    finish();
+                } else {
+					Toast.makeText(ActivityProcesses.this, getString(R.string.w_processes_select_some_process), Toast.LENGTH_SHORT).show();
+				}
+            }
+        });
 	}
 	
 	
@@ -268,5 +279,25 @@ public class ActivityProcesses extends Activity {
 			ImageView iv;
 			TextView tvPName, tvPAppName;
 		}
+	}
+
+
+
+
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		registerReceiver(receiverFinish, new IntentFilter(C.actionFinishActivity));
+	}
+
+
+
+
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiverFinish);
 	}
 }

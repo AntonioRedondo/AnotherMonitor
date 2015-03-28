@@ -33,6 +33,7 @@
     <string name="w_processes_title">Processes</string>
     <string name="w_processes_empty">Ouch! There was some problem when retrieving the system processes.</string>
     <string name="w_processes_first_time">You can remove a process from the list by performing a long click on its label.</string>
+	<string name="w_processes_select_some_process">Please select some process(es).</string>
     <string name="w_help_title">Some explanations?</string>
     <string name="w_help_text">In the main window you can open the Settings panel by pressing the graph.
         There you can set the \'Read interval\', the \'Update interval\' and the \'Graphic interval width\' settings.

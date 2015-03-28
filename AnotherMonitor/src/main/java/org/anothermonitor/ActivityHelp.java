@@ -10,6 +10,10 @@ package org.anothermonitor;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
@@ -22,6 +26,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class ActivityHelp extends Activity {
+
+	private BroadcastReceiver receiverFinish = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			finish();
+		}
+	};
 	
 	@SuppressLint("InlinedApi")
 	@Override
@@ -54,5 +65,25 @@ public class ActivityHelp extends Activity {
 		
 		// http://stackoverflow.com/questions/4790746/links-in-textview
 		Linkify.addLinks((TextView) findViewById(R.id.TVHelpText), Linkify.WEB_URLS);
+	}
+
+
+
+
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		registerReceiver(receiverFinish, new IntentFilter(C.actionFinishActivity));
+	}
+
+
+
+
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(receiverFinish);
 	}
 }
