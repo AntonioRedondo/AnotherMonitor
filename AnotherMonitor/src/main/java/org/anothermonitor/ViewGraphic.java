@@ -84,8 +84,13 @@ public class ViewGraphic extends TextureView {
 			initializeGraphic();
 		mThread = thread;
 
-		// Graphic background
+		// The next loop
+		// if (mThread.isInterrupted())
+		// 		return;
+		// is used before every time canvas.drawX() is called to avoid a fatal bug present on Android 4.0-5.0:
 		// http://stackoverflow.com/questions/20694067/textureview-throwing-fatal-signal-11-after-resuming-application
+
+		// Graphic background
 		if (mThread == null || mThread.isInterrupted())
 			return;
 		canvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
