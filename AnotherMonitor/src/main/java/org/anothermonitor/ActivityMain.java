@@ -41,12 +41,10 @@ import android.graphics.SurfaceTexture;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
+import android.os.*;
 import android.os.Process;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
@@ -138,7 +136,15 @@ public class ActivityMain extends Activity {
 						if (canvas != null) {
 							canvasLocked = true;
 							mVG.onDrawCustomised(canvas, mThread);
-							mVG.unlockCanvasAndPost(canvas);
+
+							// https://github.com/AntonioRedondo/AnotherMonitor/issues/1
+							// http://stackoverflow.com/questions/23893813/canvas-restore-causing-underflow-exception-in-very-rare-cases
+							try {
+								mVG.unlockCanvasAndPost(canvas);
+							} catch (IllegalStateException e) {
+								Log.w("Activity main: ", e.getMessage());
+							}
+
 							canvasLocked = false;
 						}
 					}
