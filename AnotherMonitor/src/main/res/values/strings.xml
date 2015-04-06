@@ -147,13 +147,11 @@
 	<string name="about_text_title">
 		<big><b>AnotherMonitor</b> v3.0.2</big>
 		\n© 2010&#8211;2015 Antonio Redondo
-		\nhttp://antonioredondo.com</string>
-<!-- 	<string name="about_text_title">
-		<big><b>AnotherMonitor</b> v1.1.0</big>
-		\n© 2010&#8211;2014 Antonio Redondo
 		\nhttp://antonioredondo.com
 		\n\nPublished under the
-		\nGNU General Public License v3</string> -->
+		\nGNU General Public License v3
+		\nhttps://github.com/AntonioRedondo/AnotherMonitor
+		\n\nChuck Norris approves this application.</string>
 	<string name="about_text">
 		\n\nAnotherMonitor monitors and records the CPU usage and memory parameters of Android devices.
 		\n\nChuck Norris approves this application.

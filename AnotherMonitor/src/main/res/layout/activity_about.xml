@@ -38,7 +38,7 @@
             	android:textSize="16sp"
             	android:textColor="@color/White" />
 
-            <TextView
+            <!--<TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -46,7 +46,7 @@
                 android:maxWidth="400dp"
                 android:text="@string/about_text"
             	android:textSize="16sp"
-            	android:textColor="@color/White" />
+            	android:textColor="@color/White" />-->
 
             <TextView
                 android:layout_width="wrap_content"

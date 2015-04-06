@@ -1,6 +1,7 @@
 /* 
  * 2010-2015 (C) Antonio Redondo
  * http://antonioredondo.com
+ * https://github.com/AntonioRedondo/AnotherMonitor
  *
  * Code under the terms of the GNU General Public License v3.
  *
@@ -33,7 +34,11 @@ public class ActivityHelp extends Activity {
 			finish();
 		}
 	};
-	
+
+
+
+
+
 	@SuppressLint("InlinedApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
