@@ -33,6 +33,10 @@ AnotherMonitor makes use of some external libraries to carry out different tasks
 
 These all dependencies are already included and configured on the Gradle files.
 
+## Contribute!
+
+If you have an awesome pull request no matter whether it's a big or small change, send it over! Your link to your GitHub account will be added below.
+
 ## License
 
 AnotherMonitor makes use of the [GNU GPL v3.0](http://choosealicense.com/licenses/gpl-3.0/) license. Remember to make public your project source code when reusing AnotherMonitor code.
