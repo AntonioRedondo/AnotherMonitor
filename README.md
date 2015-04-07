@@ -33,6 +33,10 @@ AnotherMonitor makes use of some external libraries to carry out different tasks
 
 These all dependencies are already included and configured on the Gradle files.
 
+## Known issues
+
+[Issue#1](https://github.com/AntonioRedondo/AnotherMonitor/issues/1): On some devices the graph is not shown.
+
 ## Contribute!
 
 If you have an awesome pull request no matter whether it's a big or small change, send it over! Your link to your GitHub account will be added below.
