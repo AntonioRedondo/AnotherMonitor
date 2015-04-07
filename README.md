@@ -35,7 +35,7 @@ These all dependencies are already included and configured on the Gradle files.
 
 ## Known issues
 
-[Issue#1](https://github.com/AntonioRedondo/AnotherMonitor/issues/1): On some devices the graph is not shown.
+- [Issue#1](https://github.com/AntonioRedondo/AnotherMonitor/issues/1): On some devices the graph is not shown.
 
 ## Contribute!
 
