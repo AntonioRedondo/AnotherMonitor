@@ -28,11 +28,7 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewConfiguration;
-import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
+import android.view.*;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -374,6 +370,7 @@ public class ActivityPreferences extends Activity {
 				}
 				
 				if (Build.VERSION.SDK_INT >= 19 && !ViewConfiguration.get(ActivityPreferences.this).hasPermanentMenuKey()
+						&& !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
 						&& (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT || sSW > 560)) {
 					View vChild = ((ViewGroup) v).getChildAt(0);
 					int pTop = vChild.getPaddingTop();
