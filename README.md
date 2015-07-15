@@ -24,7 +24,7 @@ The app can run in the background. Then, the second option is specially interest
 
 The app can be closed, and the recording of values can be started from the buttons shown in the system bar.
 
-In order to get the CPU usage the app does not make use of the {{Top}} command from Linux but instead it parses the {{/proc/stat}} file and work out the calculatios with the user and system time.
+In order to get the CPU usage the app does not make use of the `Top` command from Linux but instead it parses the `/proc/stat` file and work out the calculatios with the user and system time.
 
 ## Resolving dependencies
 
