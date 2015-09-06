@@ -48,12 +48,11 @@ class C {
 	// ActivityMain
 	static final String kB = "kB";
 	static final String percent = "%";
-	static final String drawThread = "drawThread";
+//	static final String drawThread = "drawThread";
 	static final String menuShown = "menuShown";
 	static final String settingsShown = "settingsShown";
 	static final String orientation = "orientation";
 	static final String processesMode = "processesMode";
-	static final String graphicMode = "graphicMode";
 	static final String canvasLocked = "canvasLocked";
 	
 	static final String welcome = "firstTime";
@@ -75,10 +74,13 @@ class C {
 	static final String threshold = "thresholdD";
 	
 	// GraphicView
-	static final int processModeCPU = 0;
-	static final int processModeMemory = 1;
-	static final int graphicModeShow = 0;
-	static final int graphicModeHide = 1;
+	static final String processMode = "processMode";
+	static final int processesModeShowCPU = 0;
+	static final int processesModeShowMemory = 1;
+
+	static final String graphicMode = "graphicMode";
+	static final int graphicModeShowMemory = 0;
+	static final int graphicModeHideMemory = 1;
 	
 	// ActivityPreferences
 	static final String currentItem = "ci";
@@ -96,5 +98,5 @@ class C {
 	static final String mCBDirtyD = "dirtyD";
 	static final String mCBCpuTotalD = "cpuTotalD";
 	static final String mCBCpuAMD = "cpuAMD";
-	static final String mCBCpuRestD = "cpuRestD";
+//	static final String mCBCpuRestD = "cpuRestD";
 }

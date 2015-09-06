@@ -145,12 +145,12 @@
 	<string name="p_percentage">-%</string>
 	<string name="about_title">About</string>
 	<string name="about_text_title">
-		<big><b>AnotherMonitor</b> v3.0.4</big>
-		\n© 2010&#8211;2015 Antonio Redondo
+		<big><b>AnotherMonitor</b> v3.0.5</big>
+		\nhttps://github.com/AntonioRedondo/AnotherMonitor
+		\n\n© 2010&#8211;2015 Antonio Redondo
 		\nhttp://antonioredondo.com
 		\n\nPublished under the
 		\nGNU General Public License v3
-		\nhttps://github.com/AntonioRedondo/AnotherMonitor
 		\n\nChuck Norris approves this application.</string>
 	<string name="about_text">
 		\n\nAnotherMonitor monitors and records the CPU usage and memory parameters of Android devices.

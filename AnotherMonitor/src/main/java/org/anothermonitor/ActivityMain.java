@@ -23,7 +23,6 @@ import android.animation.LayoutTransition;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
@@ -32,7 +31,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -43,7 +41,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
 import android.os.Process;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
@@ -98,7 +95,7 @@ public class ActivityMain extends Activity {
 				mHandlerVG.post(drawRunnableGraphic);
 				
 				setTextLabelCPU(null, mTVCPUTotalP, mSR.getCPUTotalP());
-				if (processesMode == C.processModeCPU)
+				if (processesMode == C.processesModeShowCPU)
 					setTextLabelCPU(null, mTVCPUAMP, mSR.getCPUAMP());
 				else setTextLabelCPU(null, mTVCPUAMP, null, mSR.getMemoryAM());
 
@@ -261,15 +258,48 @@ public class ActivityMain extends Activity {
 		sD = res.getDisplayMetrics().density;
 		orientation = res.getConfiguration().orientation;
 		statusBarHeight = res.getDimensionPixelSize(res.getIdentifier(C.sbh, C.dimen, C.android));
-		
 
-		
+		final SeekBar mSBWidth = (SeekBar) findViewById(R.id.SBIntervalWidth);
 		if (savedInstanceState != null && !savedInstanceState.isEmpty() && savedInstanceState.getInt(C.orientation) != orientation)
 			orientationChanged = true;
-		
-		mLTopBar = (LinearLayout) findViewById(R.id.LTopBar);
+
+
 		mVG = (ViewGraphic) findViewById(R.id.ANGraphic);
-		final SeekBar mSBWidth = (SeekBar) findViewById(R.id.SBIntervalWidth);
+
+		graphicMode = mPrefs.getInt(C.graphicMode, C.graphicModeShowMemory);
+		mVG.setGraphicMode(graphicMode);
+		mBHide = (ToggleButton) findViewById(R.id.BHideMemory);
+		mBHide.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				graphicMode = graphicMode == C.graphicModeShowMemory ? C.graphicModeHideMemory : C.graphicModeShowMemory;
+				mPrefs.edit().putInt(C.graphicMode, graphicMode).commit();
+				mVG.setGraphicMode(graphicMode);
+				mBHide.setChecked(graphicMode == C.graphicModeShowMemory ? false : true);
+				mHandlerVG.post(drawRunnableGraphic);
+			}
+		});
+		mBHide.setChecked(graphicMode == C.graphicModeShowMemory ? false : true);
+
+		processesMode = mPrefs.getInt(C.processesMode, C.processesModeShowCPU);
+		mVG.setProcessesMode(processesMode);
+		mBMemory = (Button) findViewById(R.id.BMemory);
+		mBMemory.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				processesMode = processesMode == C.processesModeShowCPU ? C.processesModeShowMemory : C.processesModeShowCPU;
+				mPrefs.edit().putInt(C.processesMode, processesMode).commit();
+				mBMemory.setText(processesMode == 0 ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
+				mVG.setProcessesMode(processesMode);
+				mHandlerVG.post(drawRunnableGraphic);
+				mHandler.removeCallbacks(drawRunnable);
+				mHandler.post(drawRunnable);
+			}
+		});
+		mBMemory.setText(processesMode == 0 ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
+
+
+		mLTopBar = (LinearLayout) findViewById(R.id.LTopBar);
 		mLGraphicSurface = (FrameLayout) findViewById(R.id.LGraphicButton);
 		
 		if (Build.VERSION.SDK_INT >= 19) {
@@ -358,12 +388,12 @@ public class ActivityMain extends Activity {
 		        if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0 && event.getAction() == KeyEvent.ACTION_UP) {
 		        	mPWMenu.dismiss();
 		            return true;
-		        }                
+		        }
 		        return false;
 		    }
 		});
 		
-		((LinearLayout) mLMenu.findViewById(R.id.LHelp)).setOnClickListener(new View.OnClickListener() {
+		mLMenu.findViewById(R.id.LHelp).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mPWMenu.dismiss();
@@ -371,7 +401,7 @@ public class ActivityMain extends Activity {
 			}
 		});
 		
-		((LinearLayout) mLMenu.findViewById(R.id.LAbout)).setOnClickListener(new View.OnClickListener() {
+		mLMenu.findViewById(R.id.LAbout).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mPWMenu.dismiss();
@@ -379,7 +409,7 @@ public class ActivityMain extends Activity {
 			}
 		});
 		
-		((LinearLayout) mLMenu.findViewById(R.id.LClose)).setOnClickListener(new View.OnClickListener() {
+		mLMenu.findViewById(R.id.LClose).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				mSR.stopSelf();
@@ -555,18 +585,6 @@ public class ActivityMain extends Activity {
 				startActivityForResult(i, 1);
 			}
 		});
-		mBMemory = (Button) findViewById(R.id.BMemory);
-		mBMemory.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				processesMode = processesMode == C.processModeCPU ? C.processModeMemory : C.processModeCPU;
-				mBMemory.setText(processesMode == 0 ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
-				mVG.setProcessesMode(processesMode);
-				mHandlerVG.post(drawRunnableGraphic);
-				mHandler.removeCallbacks(drawRunnable);
-				mHandler.post(drawRunnable);
-			}
-		});
 		mBRemoveAll = (Button) findViewById(R.id.BRemoveAll);
 		mBRemoveAll.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -580,17 +598,6 @@ public class ActivityMain extends Activity {
 						mBRemoveAll.setVisibility(View.GONE);
 					}
 				});
-			}
-		});
-		mBHide = (ToggleButton) findViewById(R.id.BHide);
-		mBHide.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				graphicMode = graphicMode == C.graphicModeShow ? C.graphicModeHide : C.graphicModeShow;
-				boolean checked = graphicMode == C.graphicModeShow ? false : true;
-				mBHide.setChecked(checked);
-				mVG.setGraphicMode(graphicMode);
-				mHandlerVG.post(drawRunnableGraphic);
 			}
 		});
 		
@@ -778,13 +785,8 @@ public class ActivityMain extends Activity {
 		});
 		
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
-			graphicMode = savedInstanceState.getInt(C.graphicMode);
-			boolean checked = graphicMode == C.graphicModeShow ? false : true;
-			mBHide.setChecked(checked);
-			mVG.setGraphicMode(graphicMode);
-			
 			processesMode = savedInstanceState.getInt(C.processesMode);
-			mBMemory.setText(processesMode == C.processModeCPU ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
+			mBMemory.setText(processesMode == C.processesModeShowCPU ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
 			mVG.setProcessesMode(processesMode);
 			
 			canvasLocked = savedInstanceState.getBoolean(C.canvasLocked);
@@ -820,7 +822,7 @@ public class ActivityMain extends Activity {
 						bottomMargin = navigationBarHeight;
 				((FrameLayout.LayoutParams) mLWelcome.getLayoutParams()).setMargins(0, 0, 0, (int)(35*sD) + bottomMargin);
 				
-				((Button) mLWelcome.findViewById(R.id.BHint)).setOnClickListener(new View.OnClickListener() {
+				(mLWelcome.findViewById(R.id.BHint)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						mPrefs.edit().putBoolean(C.welcome, false).commit();
@@ -861,7 +863,7 @@ public class ActivityMain extends Activity {
 						bottomMargin = navigationBarHeight;
 				((FrameLayout.LayoutParams) mLFeedback.getLayoutParams()).setMargins(0, 0, 0, (int)(35*sD) + bottomMargin);
 				
-				((Button) mLFeedback.findViewById(R.id.BFeedbackYes)).setOnClickListener(new View.OnClickListener() {
+				(mLFeedback.findViewById(R.id.BFeedbackYes)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						mPrefs.edit().putBoolean(C.feedbackDone, true).commit();
@@ -882,7 +884,7 @@ public class ActivityMain extends Activity {
 						}).setStartDelay(0).alpha(0).translationYBy(-15*sD);
 					}
 				});
-				((Button) mLFeedback.findViewById(R.id.BFeedbackDone)).setOnClickListener(new View.OnClickListener() {
+				(mLFeedback.findViewById(R.id.BFeedbackDone)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						mPrefs.edit().putBoolean(C.feedbackDone, true).commit();
@@ -896,7 +898,7 @@ public class ActivityMain extends Activity {
 						}).setStartDelay(0).alpha(0).translationYBy(-15*sD);
 					}
 				});
-				((Button) mLFeedback.findViewById(R.id.BFeedbackNo)).setOnClickListener(new View.OnClickListener() {
+				(mLFeedback.findViewById(R.id.BFeedbackNo)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						mLFeedback.animate().setDuration(animDuration).setListener(new AnimatorListenerAdapter() {
@@ -1110,10 +1112,10 @@ public class ActivityMain extends Activity {
 	private void setTextLabelCPUProcess(LinearLayout l) {
 		Map<String, Object> entry = (Map<String, Object>) l.getTag();
 		if (entry != null
-				&& (List<String>) entry.get(C.pFinalValue) != null && ((List<String>) entry.get(C.pFinalValue)).size() != 0
-				&& (List<String>) entry.get(C.pTPD) != null && !((List<String>) entry.get(C.pTPD)).isEmpty()
+				&& entry.get(C.pFinalValue) != null && ((List<String>) entry.get(C.pFinalValue)).size() != 0
+				&& entry.get(C.pTPD) != null && !((List<String>) entry.get(C.pTPD)).isEmpty()
 				&& entry.get(C.pDead) == null)
-			if (processesMode == C.processModeCPU)
+			if (processesMode == C.processesModeShowCPU)
 				((TextView) l.findViewById(R.id.TVpPercentage)).setText(mFormatPercent.format(((List<String>) entry.get(C.pFinalValue)).get(0)) + C.percent);
 			else ((TextView) l.findViewById(R.id.TVpPercentage)).setText(mFormatPercent.format(((List<Integer>) entry.get(C.pTPD)).get(0) * 100 / (float) mSR.getMemTotal()) + C.percent);
 	}
@@ -1125,12 +1127,12 @@ public class ActivityMain extends Activity {
 	@SuppressWarnings("unchecked")
 	private void setTextLabelMemoryProcesses(LinearLayout l) {
 		TextView tv = (TextView) l.findViewById(R.id.TVpAbsolute);
-		if (processesMode == C.processModeCPU)
+		if (processesMode == C.processesModeShowCPU)
 			tv.setVisibility(View.INVISIBLE);
 		else {
 			Map<String, Object> entry = (Map<String, Object>) l.getTag();
 			if (entry != null
-					&& (List<String>) entry.get(C.pTPD) != null && !((List<String>) entry.get(C.pTPD)).isEmpty()
+					&& entry.get(C.pTPD) != null && !((List<String>) entry.get(C.pTPD)).isEmpty()
 					&& entry.get(C.pDead) == null) {
 				tv.setVisibility(View.VISIBLE);
 				tv.setText(mFormat.format(((List<String>) entry.get(C.pTPD)).get(0)) + C.kB);
@@ -1350,8 +1352,6 @@ public class ActivityMain extends Activity {
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		outState.putInt(C.graphicMode, graphicMode);
-		outState.putInt(C.processesMode, processesMode);
 		outState.putInt(C.orientation, orientation);
 		outState.putBoolean(C.menuShown, mPWMenu.isShowing());
 		outState.putBoolean(C.settingsShown, settingsShown);

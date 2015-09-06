@@ -231,7 +231,7 @@
 			                	android:textStyle="bold" />
 	
 				            <ToggleButton
-				                android:id="@+id/BHide"
+				                android:id="@+id/BHideMemory"
 				                android:layout_width="55dp"
 				                android:layout_height="34dp"
 				                android:layout_marginLeft="5dp"

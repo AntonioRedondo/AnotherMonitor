@@ -121,7 +121,7 @@ public class ViewGraphic extends TextureView {
 		if (cpuTotalD)
 			drawLineFloat(cpuTotal, canvas, cpuTotalPaint);
 		if (cpuAMD)
-			if (processesMode == C.processModeCPU)
+			if (processesMode == C.processesModeShowCPU)
 				drawLineFloat(cpuAM, canvas, cpuAMPaint);
 			else drawLineInteger(memoryAM, canvas, cpuAMPaint);
 		
@@ -136,13 +136,13 @@ public class ViewGraphic extends TextureView {
 						paint = getPaint((Integer) l.get(n).get(C.pColour), Paint.Align.CENTER, 12, false, thickParam);
 						paints.put((String) l.get(n).get(C.pId), paint);
 					}
-					if (processesMode == C.processModeCPU) // processesMode==0 CPU usage, processesMode==1 Memory
+					if (processesMode == C.processesModeShowCPU) // processesMode==0 CPU usage, processesMode==1 Memory
 						drawLineFloat((List<Float>) l.get(n).get(C.pFinalValue), canvas, paint);
 					else drawLineInteger((List<Integer>) l.get(n).get(C.pTPD), canvas, paint); 
 				}
 			}
 		
-		if (graphicMode == C.graphicModeShow) {
+		if (graphicMode == C.graphicModeShowMemory) {
 			if (memUsedD)
 				drawLine(memUsed, canvas, memUsedPaint);
 			if (memAvailableD)

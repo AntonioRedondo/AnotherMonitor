@@ -73,7 +73,7 @@ public class ActivityAbout extends Activity {
 		Linkify.addLinks((TextView) findViewById(R.id.TVAboutText), Linkify.WEB_URLS);
 //		Linkify.addLinks((TextView) findViewById(R.id.TVAboutText), Pattern.compile(getString(R.string.about_gnugpl_text)), getString(R.string.about_gnugpl_link));
 		
-		((Button) findViewById(R.id.BGooglePlay)).setOnClickListener(new View.OnClickListener() {
+		(findViewById(R.id.BGooglePlay)).setOnClickListener(new View.OnClickListener() {
 			@SuppressWarnings("deprecation")
 			@Override
 			public void onClick(View v) {
