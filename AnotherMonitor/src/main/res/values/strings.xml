@@ -73,7 +73,7 @@
         \n\n<big><b>Recording</b></big>
         \n\nAnotherMonitor can record in a CSV file the CPU usage and memory values for later usage and processing in a spreadsheet program.
         Just press the circular red button on the main window to start recording. Then you can select and add other app process
-        to the graph by pressing the \'Choose other procesess(es)\' button and then bring the app to the foreground. AnotherMonitor will record the CPU usage of that app while it is being used.
+        to the graph by pressing the \'Choose other process(es)\' button and then bring the app to the foreground. AnotherMonitor will record the CPU usage of that app while it is being used.
         To stop recording just press the white square icon or press the \'Stop and save\' action button from the AnotherMonitor entry in the system bar.
         Values will be recorded at the pace indicated in the \'Read interval\' setting of the \'Settings\' panel.
         \n\nWhen recording, AnotherMonitor writes all the CPU usage and memory parameters to disk no matter whether they are being shown on the graph or not.
