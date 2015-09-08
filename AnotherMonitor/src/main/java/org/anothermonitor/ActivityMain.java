@@ -249,7 +249,18 @@ public class ActivityMain extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		mPrefs = getSharedPreferences(getString(R.string.app_name) + C.prefs, MODE_PRIVATE);
-		readPrefs();
+		intervalRead = mPrefs.getInt(C.intervalRead, 1000);
+		intervalUpdate = mPrefs.getInt(C.intervalUpdate, 1000);
+		intervalWidth = mPrefs.getInt(C.intervalWidth, 1);
+
+		cpuTotal = mPrefs.getBoolean(C.cpuTotal, true);
+		cpuAM = mPrefs.getBoolean(C.cpuAM, true);
+
+		memUsed = mPrefs.getBoolean(C.memUsed, true);
+		memAvailable = mPrefs.getBoolean(C.memAvailable, true);
+		memFree = mPrefs.getBoolean(C.memFree, false);
+		cached = mPrefs.getBoolean(C.cached, false);
+		threshold = mPrefs.getBoolean(C.threshold, true);
 		
 		res = getResources();
 		sD = res.getDisplayMetrics().density;
@@ -996,25 +1007,6 @@ public class ActivityMain extends Activity {
 		
 		mIVSettingsBG.setBackgroundDrawable(new BitmapDrawable(res, outputBitmap));
 	}*/
-	
-	
-	
-	
-	
-	private void readPrefs() {
-		intervalRead = mPrefs.getInt(C.intervalRead, 500);
-		intervalUpdate = mPrefs.getInt(C.intervalUpdate, 1000);
-		intervalWidth = mPrefs.getInt(C.intervalWidth, 1);
-		
-		cpuTotal = mPrefs.getBoolean(C.cpuTotal, true);
-		cpuAM = mPrefs.getBoolean(C.cpuAM, true);
-
-		memUsed = mPrefs.getBoolean(C.memUsed, true);
-		memAvailable = mPrefs.getBoolean(C.memAvailable, true);
-		memFree = mPrefs.getBoolean(C.memFree, false);
-		cached = mPrefs.getBoolean(C.cached, false);
-		threshold = mPrefs.getBoolean(C.threshold, true);
-	}
 	
 	
 	
