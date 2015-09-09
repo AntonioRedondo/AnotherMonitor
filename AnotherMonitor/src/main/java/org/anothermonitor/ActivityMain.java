@@ -249,9 +249,9 @@ public class ActivityMain extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		mPrefs = getSharedPreferences(getString(R.string.app_name) + C.prefs, MODE_PRIVATE);
-		intervalRead = mPrefs.getInt(C.intervalRead, 1000);
-		intervalUpdate = mPrefs.getInt(C.intervalUpdate, 1000);
-		intervalWidth = mPrefs.getInt(C.intervalWidth, 1);
+		intervalRead = mPrefs.getInt(C.intervalRead, C.defaultIntervalUpdate);
+		intervalUpdate = mPrefs.getInt(C.intervalUpdate, C.defaultIntervalUpdate);
+		intervalWidth = mPrefs.getInt(C.intervalWidth, C.defaultIntervalWidth);
 
 		cpuTotal = mPrefs.getBoolean(C.cpuTotal, true);
 		cpuAM = mPrefs.getBoolean(C.cpuAM, true);

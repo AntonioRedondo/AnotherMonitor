@@ -264,7 +264,7 @@ public class ActivityPreferences extends Activity {
 							R.array.read_interval_array, android.R.layout.simple_spinner_item);
 					aARead.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					mSRead.setAdapter(aARead);
-					switch (mPrefs.getInt(C.intervalRead, 1000)) {
+					switch (mPrefs.getInt(C.intervalRead, C.defaultIntervalRead)) {
 						case 500: mSRead.setSelection(0); break;
 						case 1000: mSRead.setSelection(1); break;
 						case 2000: mSRead.setSelection(2); break;
@@ -276,7 +276,7 @@ public class ActivityPreferences extends Activity {
 							R.array.update_interval_array, android.R.layout.simple_spinner_item);
 					aAUpdate.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					mSUpdate.setAdapter(aAUpdate);
-					switch (mPrefs.getInt(C.intervalUpdate, 1000)) {
+					switch (mPrefs.getInt(C.intervalUpdate, C.defaultIntervalUpdate)) {
 						case 1000: mSUpdate.setSelection(0); break;
 						case 2000: mSUpdate.setSelection(1); break;
 						case 4000: mSUpdate.setSelection(2); break;
@@ -288,7 +288,7 @@ public class ActivityPreferences extends Activity {
 							R.array.width_interval_array, android.R.layout.simple_spinner_item);
 					aAWidth.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 					mSWidth.setAdapter(aAWidth);
-					switch (mPrefs.getInt(C.intervalWidth, 1)) {
+					switch (mPrefs.getInt(C.intervalWidth, C.defaultIntervalWidth)) {
 						case 1: mSWidth.setSelection(0); break;
 						case 2: mSWidth.setSelection(1); break;
 						case 5: mSWidth.setSelection(2); break;
