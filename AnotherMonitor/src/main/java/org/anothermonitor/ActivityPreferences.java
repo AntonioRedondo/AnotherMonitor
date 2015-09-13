@@ -217,7 +217,7 @@ public class ActivityPreferences extends Activity {
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
-		// There is a weird behaviour with ViewPagers. If onSaveInstanceState() it's not overriden manually (like here)
+		// There is a weird behaviour with ViewPagers. If onSaveInstanceState() it's not overridden manually (like here)
 		// the ViewPager will save  the currentItem by itself when screen rotation, and when the new Activity is created the saved
 		// currentItem position will be requested to be instantiated first instead of item 0.
 		outState.putInt(C.currentItem, mVP.getCurrentItem());

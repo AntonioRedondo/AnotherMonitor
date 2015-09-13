@@ -58,23 +58,26 @@
 	       android:animateLayoutChanges="false" />
 	
 	    <LinearLayout
-	        android:id="@+id/LProcessesEmpty"
+	        android:id="@+id/LProcessesProblem"
 	        android:layout_width="match_parent"
 	        android:layout_height="0dip"
 	        android:layout_weight="1"
 	        android:gravity="center"
 	        android:orientation="vertical"
 	        android:visibility="gone"
-	        android:padding="25dp" >
+	        android:padding="30dp" >
 	
 	        <TextView
+				android:id="@+id/TVError"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            android:paddingBottom="50dp"
 	            android:text="@string/w_processes_empty"
 	            android:textColor="@color/VeryDarkGray"
 	            android:textSize="15sp"
-	            android:gravity="center" />
+	            android:gravity="left|center"
+				android:linksClickable="true"
+				android:autoLink="all" />
 	    </LinearLayout>
 	
 	</LinearLayout>

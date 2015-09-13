@@ -33,10 +33,7 @@ import android.content.res.Resources.NotFoundException;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Debug;
-import android.os.Debug.MemoryInfo;
 import android.os.Process;
-import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
@@ -156,13 +153,18 @@ public class ActivityProcesses extends Activity {
 				
 			} else {
 				mLV.setVisibility(View.GONE);
-				findViewById(R.id.LProcessesEmpty).setVisibility(View.VISIBLE);
+				findViewById(R.id.LProcessesProblem).setVisibility(View.VISIBLE);
 			}
 		}
 		
 		
-		if (mListProcesses == null || mListProcesses.isEmpty())
+		if (mListProcesses == null || mListProcesses.isEmpty()) {
+			mLV.setVisibility(View.GONE);
+			findViewById(R.id.LProcessesProblem).setVisibility(View.VISIBLE);
+			((TextView )findViewById(R.id.TVError)).setText(R.string.w_processes_android_51_problem);
+			findViewById(R.id.BOK).setClickable(false);
 			return;
+		}
 
 		mSA = new SimpleAdapterCustomised(this, mListProcesses, R.layout.activity_processes_entry,
 				new String[] { C.pSelected, C.pPackage, C.pName, C.pId },
