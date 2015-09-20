@@ -39,8 +39,7 @@
 		        android:layout_height="56dp"
 		        android:paddingLeft="6dp"
 		        android:paddingRight="12dp"
-		        android:src="@drawable/button_menu"
-	            android:visibility="gone" />
+		        android:src="@drawable/button_menu" />
 	        
 	    </LinearLayout>
 		

@@ -347,26 +347,26 @@ public class ActivityMain extends Activity {
 		
 		mLButtonMenu = (ImageView) findViewById(R.id.LButtonMenu);
 
+//		if (!ViewConfiguration.get(this).hasPermanentMenuKey()) {
+			mLButtonMenu.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mPWMenu.setAnimationStyle(R.style.Animations_PopDownMenu);
+					if (Build.VERSION.SDK_INT < 19)
+						mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight() + statusBarHeight);
+					else mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight());
+				}
+			});
 //		I came across with a Vodafone Ultra phone which had the Menu button implemented as an apps Navigation bar button long-click.
 //		With the below code and with these rare phones the AnotherMonitor menu button was hidden. Not anymore.
-//		if (!ViewConfiguration.get(this).hasPermanentMenuKey()) {
-//			mLButtonMenu.setVisibility(View.VISIBLE);
-//			mLButtonMenu.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View v) {
-//					mPWMenu.setAnimationStyle(R.style.Animations_PopDownMenu);
-//					if (Build.VERSION.SDK_INT < 19)
-//	        			mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight() + statusBarHeight);
-//	        		else mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight());
-//				}
-//			});
-//		} else {
+/*		} else {
+			mLButtonMenu.setVisibility(View.GONE);
 			int paddingTop = mLTopBar.getPaddingTop();
 			int paddingBottom = mLTopBar.getPaddingBottom();
 			int paddingLeft = mLTopBar.getPaddingLeft();
 			int paddingRight = mLTopBar.getPaddingRight();
 			mLTopBar.setPadding(paddingLeft, paddingTop, paddingRight + (int) (14*sD), paddingBottom);
-//		}
+		}*/
 		
 		mLButtonRecord = (ImageView) findViewById(R.id.LButtonRecord);
 		mLButtonRecord.setOnClickListener(new View.OnClickListener() {
