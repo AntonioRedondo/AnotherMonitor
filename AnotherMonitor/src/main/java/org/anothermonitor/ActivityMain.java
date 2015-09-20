@@ -346,25 +346,27 @@ public class ActivityMain extends Activity {
 		mLParent = (LinearLayout) findViewById(R.id.LParent);
 		
 		mLButtonMenu = (ImageView) findViewById(R.id.LButtonMenu);
-//		if (false) {
-		if (!ViewConfiguration.get(this).hasPermanentMenuKey()) {
-			mLButtonMenu.setVisibility(View.VISIBLE);
-			mLButtonMenu.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					mPWMenu.setAnimationStyle(R.style.Animations_PopDownMenu);
-					if (Build.VERSION.SDK_INT < 19)
-	        			mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight() + statusBarHeight);
-	        		else mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight());
-				}
-			});
-		} else {
+
+//		I came across with a Vodafone Ultra phone which had the Menu button implemented as an apps Navigation bar button long-click.
+//		With the below code and with these rare phones the AnotherMonitor menu button was hidden. Not anymore.
+//		if (!ViewConfiguration.get(this).hasPermanentMenuKey()) {
+//			mLButtonMenu.setVisibility(View.VISIBLE);
+//			mLButtonMenu.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View v) {
+//					mPWMenu.setAnimationStyle(R.style.Animations_PopDownMenu);
+//					if (Build.VERSION.SDK_INT < 19)
+//	        			mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight() + statusBarHeight);
+//	        		else mPWMenu.showAtLocation(mLTopBar, Gravity.TOP | Gravity.RIGHT, 0, mLTopBar.getHeight());
+//				}
+//			});
+//		} else {
 			int paddingTop = mLTopBar.getPaddingTop();
 			int paddingBottom = mLTopBar.getPaddingBottom();
 			int paddingLeft = mLTopBar.getPaddingLeft();
 			int paddingRight = mLTopBar.getPaddingRight();
 			mLTopBar.setPadding(paddingLeft, paddingTop, paddingRight + (int) (14*sD), paddingBottom);
-		}
+//		}
 		
 		mLButtonRecord = (ImageView) findViewById(R.id.LButtonRecord);
 		mLButtonRecord.setOnClickListener(new View.OnClickListener() {
@@ -1043,7 +1045,7 @@ public class ActivityMain extends Activity {
 	
 	
 	@SuppressWarnings("unchecked")
-	private void switchParameterForProcess(Map<String, Object> process) {		
+	private void switchParameterForProcess(Map<String, Object> process) {
 		LinearLayout l = null;
 		for (int n=0; n<mLProcessContainer.getChildCount(); ++n) {
 			l = (LinearLayout) mLProcessContainer.getChildAt(n);
