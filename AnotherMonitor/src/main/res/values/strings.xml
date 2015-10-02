@@ -136,7 +136,7 @@
 		<item>5 dp</item>
 		<item>10 dp</item>
 	</string-array>
-	<string name="p_cpuusage">CPU usage</string>
+	<string name="p_cpuusage">CPU Usage</string>
 	<string name="p_cputotalusage">Total CPU usage</string>
 	<string name="p_cpuanothermonitor">AnotherMonitor</string>
 	<string name="p_memtotal">Memory</string>
