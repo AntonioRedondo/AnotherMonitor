@@ -30,6 +30,7 @@ import android.app.ActivityManager;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -46,8 +47,6 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
 import android.os.Process;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -185,7 +184,7 @@ public class ServiceReader extends Service {
 		PendingIntent pIStopRecord = PendingIntent.getBroadcast(this, 0, new Intent(C.actionStopRecord), PendingIntent.FLAG_UPDATE_CURRENT);
 		PendingIntent pIClose = PendingIntent.getBroadcast(this, 0, new Intent(C.actionClose), PendingIntent.FLAG_UPDATE_CURRENT);
 
-		mNotificationRead = new NotificationCompat.Builder(this)
+		mNotificationRead = new Notification.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
 				.setContentText(getString(R.string.notify_read2))
 //				.setTicker(getString(R.string.notify_read))
@@ -194,12 +193,12 @@ public class ServiceReader extends Service {
 				.setWhen(0) // Removes the time
 				.setOngoing(true)
 				.setContentIntent(contentIntent) // PendingIntent.getActivity(this, 0, new Intent(this, ActivityMain.class), 0)
-				.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notify_read2)))
+				.setStyle(new Notification.BigTextStyle().bigText(getString(R.string.notify_read2)))
 		        .addAction(R.drawable.icon_circle_sb, getString(R.string.menu_record), pIStartRecord)
 		        .addAction(R.drawable.icon_times_ai, getString(R.string.menu_close), pIClose)
 				.build();
 		
-		mNotificationRecord = new NotificationCompat.Builder(this)
+		mNotificationRecord = new Notification.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
 				.setContentText(getString(R.string.notify_record2))
 				.setTicker(getString(R.string.notify_record))
@@ -208,7 +207,7 @@ public class ServiceReader extends Service {
 				.setWhen(0)
 				.setOngoing(true)
 				.setContentIntent(contentIntent)
-				.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notify_record2)))
+				.setStyle(new Notification.BigTextStyle().bigText(getString(R.string.notify_record2)))
 		        .addAction(R.drawable.icon_stop_sb, getString(R.string.menu_stop_record), pIStopRecord)
 		        .addAction(R.drawable.icon_times_ai, getString(R.string.menu_close), pIClose)
 				.build();
