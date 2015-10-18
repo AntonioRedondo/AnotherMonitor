@@ -33,8 +33,8 @@
     <string name="w_processes_title">Processes</string>
     <string name="w_processes_empty">Ouch! There was some problem when retrieving the system processes.</string>
     <string name="w_processes_android_51_problem"><big><b>Ouch!</b></big>
-		\n\nFor Android 5.1.1 the processes list doesn\'t work anymore.
-		It\'s due to an Android API change. Still trying to find out some workaround.
+		\n\nFrom Android 5.1.1+ the processes list doesn\'t work anymore.
+		It\'s due to an undocumented Android API behaviour change. Still trying to find out some workaround.
 		\n\nMore info: http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag</string>
     <string name="w_processes_first_time">You can remove a process from the list by performing a long click on its label.</string>
 	<string name="w_processes_select_some_process">Please select some process(es).</string>
@@ -136,7 +136,7 @@
 		<item>5 dp</item>
 		<item>10 dp</item>
 	</string-array>
-	<string name="p_cpuusage">CPU usage</string>
+	<string name="p_cpuusage">CPU Usage</string>
 	<string name="p_cputotalusage">Total CPU usage</string>
 	<string name="p_cpuanothermonitor">AnotherMonitor</string>
 	<string name="p_memtotal">Memory</string>
