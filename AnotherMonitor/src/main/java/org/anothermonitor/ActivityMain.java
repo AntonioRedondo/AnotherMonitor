@@ -810,7 +810,6 @@ public class ActivityMain extends Activity {
 					public void onGlobalLayout() {
 						mLSettings.getViewTreeObserver().removeGlobalOnLayoutListener(this);
 						mLSettings.getLayoutParams().height = settingsHeight;
-//						blur();
 					}
 				});
 			if (savedInstanceState.getBoolean(C.menuShown))
@@ -944,8 +943,13 @@ public class ActivityMain extends Activity {
 	private void showSettings() {
 		settingsShown = true;
 		mLGraphicSurface.setEnabled(false);
-//		blur();
+
+		// By changing the panel position in this way you can keep the background height unchanged but cropped and attached to the top of the panel.
+		// This is important if you're using an image as background.
 //		mLSettings.animate().setDuration(animTime).setInterpolator(new AccelerateDecelerateInterpolator()).translationY(0);
+
+		// In this way the background height will progressively be bigger, it will enlarge from 0 to the real size.
+		// Now this doesn't matter because the background is a solid color.
 		ValueAnimator va = ValueAnimator.ofInt(0, settingsHeight);
 		va.setDuration(animDuration);
 		va.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -979,36 +983,6 @@ public class ActivityMain extends Activity {
 		});
 		va.start();
 	}
-	
-	
-	
-	
-	
-	// http://stackoverflow.com/questions/2067955/fast-bitmap-blur-for-android-sdk
-	// http://www.doubleencore.com/2013/10/renderscript-for-all/
-/*	@SuppressWarnings("deprecation")
-	private void blur() {
-		View v = mLParent;
-		if (rs == null) {
-			rs = RenderScript.create(this);
-			intrinsic = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
-		}
-		
-		Bitmap b = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
-		v.draw(new Canvas(b));
-		
-		Bitmap ba = Bitmap.createBitmap(b, 0, b.getHeight() - (int) settingsHeight, b.getWidth(), settingsHeight);
-		Bitmap inputBitmap = Bitmap.createScaledBitmap(ba, Math.round(ba.getWidth() * 0.1f), Math.round(ba.getHeight() * 0.1f), false);
-		Bitmap outputBitmap = Bitmap.createBitmap(inputBitmap);
-		
-		Allocation tmpOut = Allocation.createFromBitmap(rs, outputBitmap);
-		intrinsic.setRadius(10f);
-		intrinsic.setInput(Allocation.createFromBitmap(rs, inputBitmap));
-		intrinsic.forEach(tmpOut);
-		tmpOut.copyTo(outputBitmap);
-		
-		mIVSettingsBG.setBackgroundDrawable(new BitmapDrawable(res, outputBitmap));
-	}*/
 	
 	
 	
