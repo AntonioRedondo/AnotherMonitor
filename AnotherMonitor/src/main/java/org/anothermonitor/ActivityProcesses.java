@@ -37,6 +37,7 @@ import android.os.Process;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
+import com.jaredrummler.android.processes.ProcessManager;
 
 public class ActivityProcesses extends Activity {
 	private int navigationBarHeight;
@@ -111,23 +112,27 @@ public class ActivityProcesses extends Activity {
 			
 		} else {
 			PackageManager pm = getPackageManager();
-			List<ActivityManager.RunningAppProcessInfo> runningAppProcesses = ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getRunningAppProcesses();
+
+			List<ActivityManager.RunningAppProcessInfo> runningAppProcesses;
+			if (Build.VERSION.SDK_INT < 22) { // http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag
+				runningAppProcesses = ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getRunningAppProcesses();
+			} else runningAppProcesses = ProcessManager.getRunningAppProcessInfo(this);
+
 			if (runningAppProcesses != null) {
 				int pid = Process.myPid();
 				for (ActivityManager.RunningAppProcessInfo p : runningAppProcesses) {
-//				ActivityManager am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-//				int[] arrayPIds = new int[runningAppProcesses.size()];
-//				for (int n=0; n<runningAppProcesses.size(); ++n) {
-//					ActivityManager.RunningAppProcessInfo p = runningAppProcesses.get(n);
 					if (pid != p.pid) {
-//						arrayPIds[n] = p.pid;
 						String name = null;
 						try {
-							name = (String) pm.getApplicationLabel(pm.getApplicationInfo(p.pkgList[0], 0));
+							name = (String) pm.getApplicationLabel(pm.getApplicationInfo(p.pkgList != null && p.pkgList.length > 0 ? p.pkgList[0] : p.processName, 0));
 						} catch (NameNotFoundException e) {
 						} catch (NotFoundException e) {
 						}
-						mListProcesses.add(mapDataForPlacesList(false, name, String.valueOf(p.pid), p.pkgList[0], p.processName));
+
+						if (name == null)
+							name = p.processName;
+
+						mListProcesses.add(mapDataForPlacesList(false, name, String.valueOf(p.pid), p.pkgList != null && p.pkgList.length > 0 ? p.pkgList[0] : p.processName, p.processName));
 					}
 				}
 				
@@ -265,7 +270,9 @@ public class ActivityProcesses extends Activity {
 				tag.l.setBackgroundColor(ActivityProcesses.this.getResources().getColor(R.color.bgProcessessSelected));
 			else tag.l.setBackgroundColor(Color.TRANSPARENT);
 			try {
-				tag.iv.setImageDrawable(getPackageManager().getApplicationIcon((String) mListProcesses.get(position).get(C.pPackage)));
+				if (mListProcesses.get(position).get(C.pAppName).equals(mListProcesses.get(position).get(C.pName)))
+					tag.iv.setImageDrawable(getDrawable(R.drawable.transparent_pixel));
+				else tag.iv.setImageDrawable(getPackageManager().getApplicationIcon((String) mListProcesses.get(position).get(C.pPackage)));
 			} catch (NameNotFoundException e) {
 			}
 			tag.tvPAppName.setText((String) mListProcesses.get(position).get(C.pAppName));

@@ -35,3 +35,7 @@ android {
         }
     }
 }
+
+dependencies {
+    compile 'com.jaredrummler:android-processes:1.0.1'
+}
