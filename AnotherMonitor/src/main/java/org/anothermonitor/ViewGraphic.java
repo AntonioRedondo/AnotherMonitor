@@ -33,7 +33,7 @@ public class ViewGraphic extends TextureView {
 					 memUsedD, memAvailableD, memFreeD, cachedD, thresholdD;
 	private int processesMode, graphicMode, yTop, yBottom, xLeft, xRight, yBottomTextSpace=25, xLeftTextSpace=10, yLegendSpace = 8, graphicHeight, graphicWidth, minutes, seconds, intervalTotalNumber, memTotal,
 				 thickParam, thickGrid, thickEdges, tempVar, textSize, textSizeLegend, yTopSeparation;
-	private String readIntervalText = "Read interval", updateIntervalText = "Update interval", graphicIntervaWidthlText = "Graphic interval with", recordingText = "Recording";
+	private String readIntervalText, updateIntervalText, graphicIntervaWidthlText, recordingText = "Recording";
 //	private Path graphicPath;
 	private Rect bgRect;
 	private Paint bgPaint, circlePaint, textPaintRecording, textPaintLegend, textPaintLegendV, textPaintInside, linesEdgePaint, linesGridPaint,
@@ -60,6 +60,10 @@ public class ViewGraphic extends TextureView {
 //		sWidth = res.getDisplayMetrics().widthPixels;
 //		sHeight = res.getDisplayMetrics().heightPixels;
 //		orientation = res.getConfiguration().orientation;
+
+		readIntervalText = res.getString(R.string.interval_read);
+		updateIntervalText = res.getString(R.string.interval_update);
+		graphicIntervaWidthlText = res.getString(R.string.interval_width);
 
 		thickGrid = (int) Math.ceil(1*sD);
 		thickParam = (int) Math.ceil(1*sD);
@@ -222,13 +226,13 @@ public class ViewGraphic extends TextureView {
 		// Read interval, Update interval, Graphic interval width text
 		if (mThread.isInterrupted())
 			return;
-		canvas.drawText(readIntervalText + ": " + mFormatPercent.format(mSR.getIntervalRead()/(float)1000) + " s", xLeft+15, yTop+5+yTopSeparation, textPaintInside);
+		canvas.drawText(readIntervalText + " " + mFormatPercent.format(mSR.getIntervalRead()/(float)1000) + " s", xLeft+15, yTop+5+yTopSeparation, textPaintInside);
 		if (mThread.isInterrupted())
 			return;
-		canvas.drawText(updateIntervalText + ": " + mFormatPercent.format(mSR.getIntervalUpdate()/(float)1000) + " s", xLeft+15, yTop+5+yTopSeparation*2, textPaintInside);
+		canvas.drawText(updateIntervalText + " " + mFormatPercent.format(mSR.getIntervalUpdate()/(float)1000) + " s", xLeft+15, yTop+5+yTopSeparation*2, textPaintInside);
 		if (mThread.isInterrupted())
 			return;
-		canvas.drawText(graphicIntervaWidthlText + ": " + mSR.getIntervalWidth() + " dp", xLeft+15, yTop+5+yTopSeparation*3, textPaintInside);
+		canvas.drawText(graphicIntervaWidthlText + " " + mSR.getIntervalWidth() + " dp", xLeft+15, yTop+5+yTopSeparation*3, textPaintInside);
 		
 		// Recording text
 		if (mSR.isRecording()) {
