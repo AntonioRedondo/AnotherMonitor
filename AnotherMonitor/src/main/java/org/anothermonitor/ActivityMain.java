@@ -318,10 +318,12 @@ public class ActivityMain extends Activity {
 			
 			float sSW = res.getConfiguration().smallestScreenWidthDp;
 			
-			if (!ViewConfiguration.get(this).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
+			if (!ViewConfiguration.get(this).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME)
 					&& (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT || sSW > 560)) {
 				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 				navigationBarHeight = res.getDimensionPixelSize(res.getIdentifier(C.nbh, C.dimen, C.android));
+				if (navigationBarHeight == 0)
+					navigationBarHeight = (int) (48*sD);
 				
 				FrameLayout nb = (FrameLayout) findViewById(R.id.LNavigationBar);
 				nb.setVisibility(View.VISIBLE);

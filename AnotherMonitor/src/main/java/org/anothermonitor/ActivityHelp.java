@@ -52,16 +52,18 @@ public class ActivityHelp extends Activity {
 		if (Build.VERSION.SDK_INT >= 19) {
 			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
 			
-			float sSW = res.getConfiguration().smallestScreenWidthDp;
+			float sSW = res.getConfiguration().smallestScreenWidthDp, sD = res.getDisplayMetrics().density;
 			
 			LinearLayout l = (LinearLayout) findViewById(R.id.LParent);
 			int statusBarHeight = res.getDimensionPixelSize(res.getIdentifier(C.sbh, C.dimen, C.android));
 			int navigationBarHeight = 0;
 			
-			if (!ViewConfiguration.get(this).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK)
+			if (!ViewConfiguration.get(this).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME)
 					&& (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT || sSW > 560)) {
 				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
 				navigationBarHeight = res.getDimensionPixelSize(res.getIdentifier(C.nbh, C.dimen, C.android));
+				if (navigationBarHeight == 0)
+					navigationBarHeight = (int) (48*sD);
 				FrameLayout nb = (FrameLayout) findViewById(R.id.LNavigationBar);
 				nb.setVisibility(View.VISIBLE);
 				((FrameLayout.LayoutParams) nb.getLayoutParams()).height = navigationBarHeight;
