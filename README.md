@@ -8,8 +8,6 @@ AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 
 ## Download ready-to-use app
 
-[![App Icon](https://developer.android.com/images/brand/en_generic_rgb_wo_60.png)](https://play.google.com/store/apps/details?id=org.anothermonitor)
-
 The app is released on Google Play: https://play.google.com/store/apps/details?id=org.anothermonitor.
 
 ## Details
