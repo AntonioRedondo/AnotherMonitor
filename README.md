@@ -32,6 +32,7 @@ For devices running Android 5.1.1+ it is not possible any more to retrieve the p
 
 AnotherMonitor makes use of some external libraries to carry out different tasks:
 -  [Android v4 Support Libraries](http://developer.android.com/tools/support-library/features.html#v4).
+-  [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses): retrieves the device processes list to populate the 'Processes' screen.
 
 These all dependencies are already included and configured on the Gradle files.
 
