@@ -24,6 +24,10 @@ The app can be closed, and the recording of values can be started from the butto
 
 In order to get the CPU usage the app does not make use of the `Top` command from Linux but instead it parses the `/proc/stat` file and work out the calculatios with the user and system time.
 
+#### Retriving device processes since Android 5.1.1+
+
+For devices running Android 5.1.1+ it is not possible any more to retrieve the processes list with [ActivityManager.getRunningAppProcesses()](http://developer.android.com/reference/android/app/ActivityManager.html#getRunningAppProcesses%28%29). This change has not been documented anywhere on the official documentation nor an alternative way to retrieve the list has been provided. Thankfully the community at Stack Overflow came out with some [satisfying solution](http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag). For devices with Android 5.1.1+ AnotherMonitor now uses the unofficial [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses) library to retrieve the processes list. The drawback of this is that for some processes there is no way to retrieve the app name nor the icon and instead only the long package name is shown.
+
 ## Resolving dependencies
 
 AnotherMonitor makes use of some external libraries to carry out different tasks:
