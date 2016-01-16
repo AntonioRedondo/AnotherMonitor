@@ -20,8 +20,8 @@ android {
         applicationId "org.anothermonitor"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 7
-        versionName "3.0.5"
+        versionCode 8
+        versionName "3.0.6"
     }
 
     compileOptions {
@@ -37,5 +37,5 @@ android {
 }
 
 dependencies {
-    compile 'com.jaredrummler:android-processes:1.0.1'
+    compile 'com.jaredrummler:android-processes:1.0.3'
 }

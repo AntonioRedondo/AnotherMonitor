@@ -149,9 +149,9 @@
 	<string name="p_percentage">-%</string>
 	<string name="about_title">About</string>
 	<string name="about_text_title">
-		<big><b>AnotherMonitor</b> v3.0.5</big>
+		<big><b>AnotherMonitor</b> v3.0.6</big>
 		\nhttps://github.com/AntonioRedondo/AnotherMonitor
-		\n\n© 2010&#8211;2015 Antonio Redondo
+		\n\n© 2010&#8211;2016 Antonio Redondo
 		\nhttp://antonioredondo.com
 		\n\nPublished under the
 		\nGNU General Public License v3
