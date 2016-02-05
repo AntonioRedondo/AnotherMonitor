@@ -20,9 +20,17 @@ It has 2 main options:
 
 The app can run in the background. Then, the second option is specially interesting since, in the background, AnotherMonitor consumes little resources and can monitor and record the CPU and memory values that other applications are using in the foreground.
 
-The app can be closed, and the recording of values can be started from the buttons shown in the system bar.
+From the buttons shown in the system bar the recording of values can be started and the app can be closed.
 
-In order to get the CPU usage the app does not make use of the `Top` command from Linux but instead it parses the `/proc/stat` file and work out the calculatios with the user and system time.
+#### How CPU and memory usage are obtained
+
+In order to get the CPU usage the app does NOT make use of the `Top` command from Linux but instead it parses `/proc/stat` and rest of process folders from the `procfs` file system and work out the calculations with the user and system time. This is implemented on [ServiceReader.class](https://github.com/AntonioRedondo/AnotherMonitor/blob/master/AnotherMonitor/src/main/java/org/anothermonitor/ServiceReader.java#L259). You can find more information about it on:
+- [procfs - Wikipedia](https://en.wikipedia.org/wiki/Procfs)
+- [Calculating CPU usage of a process in Linux - Stack Overflow](http://stackoverflow.com/questions/1420426/calculating-cpu-usage-of-a-process-in-linux)
+
+#### About multi-core devices
+
+The app does not support showing of information regarding a specific device's core in multi-core devices. The implementation of this functionality would require considerable time. So there is no schedule for this feature.
 
 #### Retriving device processes since Android 5.1.1+
 
