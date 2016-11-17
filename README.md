@@ -42,11 +42,7 @@ AnotherMonitor makes use of some external libraries to carry out different tasks
 -  [Android v4 Support Libraries](http://developer.android.com/tools/support-library/features.html#v4).
 -  [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses): retrieves the device processes list to populate the 'Processes' screen.
 
-These all dependencies are already included and configured on the Gradle files.
-
-## Known issues
-
-- [Issue#1](https://github.com/AntonioRedondo/AnotherMonitor/issues/1): On some devices the graph is not shown.
+These all dependencies are included and configured on the Gradle files.
 
 ## Contribute!
 
