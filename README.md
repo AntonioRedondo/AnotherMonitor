@@ -1,5 +1,6 @@
 # AnotherMonitor
 
+.
 <img src="https://lh4.ggpht.com/gfwMh4Ih0VD0AaxI8_eh11m6CRu_zSW6-U6F25AjCdlUjCkliWHBgJMhDb3ePdl_EMoT" width="180px" />
 <img src="https://lh4.ggpht.com/fugTTF9i76nsfnpWfv34xe1Xz5u4dDWOqbTYkBaPrzud4zPuYIZtQQhEyH7pX9POjYU" width="180px" />
 <img src="https://lh5.ggpht.com/96BmklbBOEOgL5mmXZQkofwswLGEzY4Zf6EirtF2nOBgf_cTo86RxuzCInv7etIfNgTO" width="180px" />
@@ -12,7 +13,7 @@ The app is released on Google Play: https://play.google.com/store/apps/details?i
 
 ## IMPORTANT NOTICE for Android 7.0 devices
 
-Due to undocumented changes made by Google on Android 7.0 devices CPU usage information for processes will not work unless you have root access. Rest of the app will work as usual. Read the below [Retriving device processes since Android Nougat 7.0 (API 24)](#retriving-device-processes-since-android-nougat-7) for more info.
+Due to undocumented changes made by Google on Android 7.0 CPU usage information for processes will not work unless you have root access. Rest of the app will work as usual. Read the below [Retriving device processes since Android Nougat 7.0 (API 24)](#retriving-device-processes-since-android-nougat-70-api-24) for more info.
 
 ## Details
 
@@ -42,7 +43,7 @@ For devices running Android 5.1.1 it is not possible any more to retrieve the pr
 
 #### Retriving device processes since Android Nougat 7.0 (API 24)
 
-In Android 7.0 Google once again has made undocumented changes and has significantly restricted access to the `proc` file system. This means that since this new API level it is not possible anymore to retrieve processes unless you have root access.  AnotherMonitor running on devices with Android 7.0 or higher only shows total CPU usage, AnotherMonitor CPU usage and memory usage, but not CPU usage for other processes.[Star this issue](https://code.google.com/p/android/issues/detail?id=205565) to push Google to implement an alternative API.
+In Android 7.0 Google once again has made undocumented changes and has significantly restricted access to the `proc` file system. This means that since this new API level it is not possible anymore to retrieve processes unless you have root access.  AnotherMonitor running on devices with Android 7.0 or higher only shows total CPU usage, AnotherMonitor CPU usage and memory usage, but not CPU usage for other processes. [Star this issue](https://code.google.com/p/android/issues/detail?id=205565) to push Google to implement an alternative API.
 
 ## Resolving dependencies
 
