@@ -11,9 +11,9 @@ AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 
 The app is released on Google Play: https://play.google.com/store/apps/details?id=org.anothermonitor.
 
-## IMPORTANT NOTICE for Android 7.0 devices
+## IMPORTANT NOTICE for Android 7.0 and Android 8.0 devices
 
-Due to undocumented changes made by Google on Android 7.0 CPU usage information for processes will not work unless you have root access. Rest of the app will work as usual. Read the below [Retriving device processes since Android Nougat 7.0 (API 24)](#retriving-device-processes-since-android-nougat-70-api-24) for more info.
+Due to undocumented changes made by Google on Android 7.0 CPU usage information for processes others than the own AnotherMonitor will not work unless you have root access. Rest of the app will work as usual. For devices with Android 8.0 the AnotherMonitor will not even show the CPU usage of the own app process, just memory values. Read the below [Retriving processes info since Android 7.0](#retrieving-processes-info-since-android-nougat-70-api-24-august-2016) for more info.
 
 ## Details
 
@@ -37,21 +37,25 @@ In order to get the CPU usage the app does NOT make use of the `Top` command fro
 
 The app does not support showing of information regarding a specific device's core in multi-core devices. The implementation of this functionality would require considerable time. So there is no schedule for this feature.
 
-#### Retriving device processes since Android Lollipop 5.1.1 (API 22)
+#### Retrieving processes info since Android Lollipop 5.1 (API 22, March 2015)
 
 For devices running Android 5.1.1 it is not possible any more to retrieve the processes list with [ActivityManager.getRunningAppProcesses()](http://developer.android.com/reference/android/app/ActivityManager.html#getRunningAppProcesses%28%29). This change has not been documented anywhere on the official documentation nor an alternative way to retrieve the list has been provided. Thankfully the community at Stack Overflow came out with some [satisfying solution](http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag). For devices with Android 5.1 AnotherMonitor now uses the unofficial [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses) library to retrieve the processes list. The drawback of this is that for some processes there is no way to retrieve the app name nor the icon and instead only the long package name is shown.
 
-#### Retriving device processes since Android Nougat 7.0 (API 24)
+#### Retrieving processes info since Android Nougat 7.0 (API 24, August 2016)
 
-In Android 7.0 Google once again has made undocumented changes and has significantly restricted access to the `proc` file system. This means that since this new API level it is not possible anymore to retrieve processes unless you have root access.  AnotherMonitor running on devices with Android 7.0 or higher only shows total CPU usage, AnotherMonitor CPU usage and memory usage, but not CPU usage for other processes. [Star this issue](https://code.google.com/p/android/issues/detail?id=205565) to push Google to implement an alternative API.
+In Android 7.0 Google once again has made undocumented changes and has significantly restricted access to the `proc` file system. This means that since this new API level it is not possible anymore to retrieve processes info unless you have root access. AnotherMonitor running on devices with Android 7.0 will only show total CPU usage, AnotherMonitor CPU usage and memory usage, but not CPU usage for other processes. [Star this issue](https://code.google.com/p/android/issues/detail?id=205565) to push Google to implement an alternative API.
+
+
+#### Retrieving processes info since Android O 8.0 (API 26, Autunm 2017)
+
+In Android 8.0 Google once again has made undocumented changes and has restricted even more the access to the `proc` file system. Until now it was possible to at least get process info of the process running the app and total CPU usage. This does not work any more. Furthermore [ActivityManager.getRunningServices(int)](https://developer.android.com/reference/android/app/ActivityManager.html#getRunningServices(int)) is being deprecated, alternative method which could be used to access processes info. AnotherMonitor running on devices with Android 8.0 will only show memory usage, but not total CPU usage or CPU usage for any process, includind the own app process.
+
 
 ## Resolving dependencies
 
-AnotherMonitor makes use of some external libraries to carry out different tasks:
--  [Android v4 Support Libraries](http://developer.android.com/tools/support-library/features.html#v4).
--  [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses): retrieves the device processes list to populate the 'Processes' screen.
+AnotherMonitor only has one external dependency, [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses). It is used to retrieve the device processes list to populate the 'Processes' screen.
 
-These all dependencies are included and configured on the Gradle files.
+See the [Gradle](https://github.com/AntonioRedondo/AnotherMonitor/blob/master/AnotherMonitor/build.gradle) file for more details.
 
 ## Contribute!
 
