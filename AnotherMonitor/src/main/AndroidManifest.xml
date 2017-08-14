@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="org.anothermonitor"
-          android:versionCode="8"
-          android:versionName="3.0.6">
+          android:versionCode="9"
+          android:versionName="3.1.0">
 
     <uses-sdk
             android:minSdkVersion="16"
-            android:targetSdkVersion="23" />
+            android:targetSdkVersion="25" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 

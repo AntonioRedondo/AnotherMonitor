@@ -1,7 +1,7 @@
 /*
- * 2010-2015 (C) Antonio Redondo
+ * 2010-2017 (C) Antonio Redondo
  * http://antonioredondo.com
- * https://github.com/AntonioRedondo/AnotherMonitor
+ * http://github.com/AntonioRedondo/AnotherMonitor
  *
  * Code under the terms of the GNU General Public License v3.
  *
@@ -49,6 +49,7 @@ class C {
 	static final String listProcesses = "listProcesses";
 	
 	// ActivityMain
+	static final int storagePermission = 1;
 	static final String kB = "kB";
 	static final String percent = "%";
 //	static final String drawThread = "drawThread";

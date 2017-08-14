@@ -1,5 +1,5 @@
 /* 
- * 2010-2015 (C) Antonio Redondo
+ * 2010-2017 (C) Antonio Redondo
  * http://antonioredondo.com
  * https://github.com/AntonioRedondo/AnotherMonitor
  *
@@ -34,10 +34,11 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Process;
+import android.util.Log;
 import android.view.*;
 import android.widget.*;
 import android.widget.AdapterView.OnItemClickListener;
-import com.jaredrummler.android.processes.ProcessManager;
+import com.jaredrummler.android.processes.AndroidProcesses;
 
 public class ActivityProcesses extends Activity {
 	private int navigationBarHeight;
@@ -49,15 +50,16 @@ public class ActivityProcesses extends Activity {
 									   mListSelected = new ArrayList<Map<String, Object>>();
 	private SimpleAdapter mSA;
 	private ListView mLV;
-
+	private Button mBOK;
+	
 	private BroadcastReceiver receiverFinish = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			finish();
 		}
 	};
-
-
+	
+	
 	
 	
 	
@@ -70,6 +72,7 @@ public class ActivityProcesses extends Activity {
 		final Resources res = getResources();
 		
 		mLV = (ListView) findViewById(R.id.listView);
+		mBOK = (Button) findViewById(R.id.BOK);
 		
 		
 		if (Build.VERSION.SDK_INT >= 19) {
@@ -81,7 +84,7 @@ public class ActivityProcesses extends Activity {
 			if (!ViewConfiguration.get(this).hasPermanentMenuKey() && !KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_HOME)
 					&& (res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT || sSW > 560)) {
 				getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
-
+				
 				navigationBarHeight = res.getDimensionPixelSize(res.getIdentifier(C.nbh, C.dimen, C.android));
 				if (navigationBarHeight == 0)
 					navigationBarHeight = (int) (48*sD);
@@ -92,8 +95,8 @@ public class ActivityProcesses extends Activity {
 				nb.setVisibility(View.VISIBLE);
 				((FrameLayout.LayoutParams) nb.getLayoutParams()).height = navigationBarHeight;
 			}
-
-            RelativeLayout lTopBar = ((RelativeLayout) findViewById(R.id.LWindowMyPlacesTopBar));
+			
+			RelativeLayout lTopBar = (RelativeLayout) findViewById(R.id.LWindowMyPlacesTopBar);
 			int pLeft = lTopBar.getPaddingLeft();
 			int pTop = lTopBar.getPaddingTop();
 			int pRight = lTopBar.getPaddingRight();
@@ -114,12 +117,12 @@ public class ActivityProcesses extends Activity {
 			
 		} else {
 			PackageManager pm = getPackageManager();
-
+			
 			List<ActivityManager.RunningAppProcessInfo> runningAppProcesses;
 			if (Build.VERSION.SDK_INT < 22) { // http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag
 				runningAppProcesses = ((ActivityManager) getSystemService(ACTIVITY_SERVICE)).getRunningAppProcesses();
-			} else runningAppProcesses = ProcessManager.getRunningAppProcessInfo(this);
-
+			} else runningAppProcesses = AndroidProcesses.getRunningAppProcessInfo(this);
+			
 			if (runningAppProcesses != null) {
 				int pid = Process.myPid();
 				for (ActivityManager.RunningAppProcessInfo p : runningAppProcesses) {
@@ -130,22 +133,22 @@ public class ActivityProcesses extends Activity {
 						} catch (NameNotFoundException e) {
 						} catch (NotFoundException e) {
 						}
-
+						
 						if (name == null)
 							name = p.processName;
-
+						
 						mListProcesses.add(mapDataForPlacesList(false, name, String.valueOf(p.pid), p.pkgList != null && p.pkgList.length > 0 ? p.pkgList[0] : p.processName, p.processName));
 					}
 				}
 				
 				Collections.sort(mListProcesses, new Comparator<Map<String, Object>>(){
-				     public int compare(Map<String, Object> o1, Map<String, Object> o2){
-				         if(o1.get(C.pAppName).equals(o2.get(C.pAppName)))
-				             return 0;
-				         return ((String) o1.get(C.pAppName)).compareTo((String) o2.get(C.pAppName)) < 0 ? -1 : 1;
-				     }
+					 public int compare(Map<String, Object> o1, Map<String, Object> o2){
+						 if(o1.get(C.pAppName).equals(o2.get(C.pAppName)))
+							 return 0;
+						 return ((String) o1.get(C.pAppName)).compareTo((String) o2.get(C.pAppName)) < 0 ? -1 : 1;
+					 }
 				});
-		
+				
 				List<Map<String, Object>> mListSelectedProv = (List<Map<String, Object>>) getIntent().getSerializableExtra(C.listSelected);
 				if (mListSelectedProv != null && !mListSelectedProv.isEmpty()) {
 					for (Map<String, Object> processSelected : mListSelectedProv) {
@@ -160,6 +163,7 @@ public class ActivityProcesses extends Activity {
 				
 			} else {
 				mLV.setVisibility(View.GONE);
+				mBOK.setVisibility(View.GONE);
 				findViewById(R.id.LProcessesProblem).setVisibility(View.VISIBLE);
 			}
 		}
@@ -167,12 +171,12 @@ public class ActivityProcesses extends Activity {
 		
 		if (mListProcesses == null || mListProcesses.isEmpty()) {
 			mLV.setVisibility(View.GONE);
+			mBOK.setVisibility(View.GONE);
 			findViewById(R.id.LProcessesProblem).setVisibility(View.VISIBLE);
 			((TextView )findViewById(R.id.TVError)).setText(R.string.w_processes_android_51_problem);
-			findViewById(R.id.BOK).setClickable(false);
 			return;
 		}
-
+		
 		mSA = new SimpleAdapterCustomised(this, mListProcesses, R.layout.activity_processes_entry,
 				new String[] { C.pSelected, C.pPackage, C.pName, C.pId },
 				new int[] { R.id.LpBG, R.id.IVpIconBig, R.id.TVpAppName, R.id.TVpName });
@@ -201,18 +205,18 @@ public class ActivityProcesses extends Activity {
 				mSA.notifyDataSetChanged();
 			}
 		});
-
-        findViewById(R.id.BOK).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mListSelected.size() != 0) {
-                    setResult(1, new Intent(ActivityProcesses.this, ActivityMain.class).putExtra(C.listSelected, (Serializable) mListSelected));
-                    finish();
-                } else {
+		
+		mBOK.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (mListSelected.size() != 0) {
+					setResult(1, new Intent(ActivityProcesses.this, ActivityMain.class).putExtra(C.listSelected, (Serializable) mListSelected));
+					finish();
+				} else {
 					Toast.makeText(ActivityProcesses.this, getString(R.string.w_processes_select_some_process), Toast.LENGTH_SHORT).show();
 				}
-            }
-        });
+			}
+		});
 	}
 	
 	
@@ -290,21 +294,21 @@ public class ActivityProcesses extends Activity {
 			TextView tvPName, tvPAppName;
 		}
 	}
-
-
-
-
-
+	
+	
+	
+	
+	
 	@Override
 	public void onStart() {
 		super.onStart();
 		registerReceiver(receiverFinish, new IntentFilter(C.actionFinishActivity));
 	}
-
-
-
-
-
+	
+	
+	
+	
+	
 	@Override
 	public void onDestroy() {
 		super.onDestroy();

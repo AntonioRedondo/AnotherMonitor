@@ -1,7 +1,7 @@
 /* 
- * 2010-2015 (C) Antonio Redondo
+ * 2010-2017 (C) Antonio Redondo
  * http://antonioredondo.com
- * https://github.com/AntonioRedondo/AnotherMonitor
+ * http://github.com/AntonioRedondo/AnotherMonitor
  *
  * Code under the terms of the GNU General Public License v3.
  *
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.LayoutTransition;
@@ -31,6 +32,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -41,6 +43,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
 import android.os.Process;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
@@ -53,8 +57,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
-public class ActivityMain extends Activity {
-
+public class ActivityMain extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
+	
 	private boolean cpuTotal, cpuAM,
 				memUsed, memAvailable, memFree, cached, threshold,
 				settingsShown, canvasLocked, orientationChanged;
@@ -64,8 +68,8 @@ public class ActivityMain extends Activity {
 	private SharedPreferences mPrefs;
 	private FrameLayout mLSettings, mLGraphicSurface, mCloseSettings;
 	private LinearLayout mLParent, mLTopBar, mLMenu, mLProcessContainer, mLFeedback, mLWelcome,
-						  mLCPUTotal, mLCPUAM,
-						  mLMemUsed, mLMemAvailable, mLMemFree, mLCached, mLThreshold;
+						mLCPUTotal, mLCPUAM,
+						mLMemUsed, mLMemAvailable, mLMemFree, mLCached, mLThreshold;
 	private TextView mTVCPUTotalP, mTVCPUAMP, mTVMemoryAM,
 					mTVMemTotal, mTVMemUsed, mTVMemAvailable, mTVMemFree, mTVCached, mTVThreshold,
 								 mTVMemUsedP, mTVMemAvailableP, mTVMemFreeP, mTVCachedP, mTVThresholdP;
@@ -98,7 +102,7 @@ public class ActivityMain extends Activity {
 				if (processesMode == C.processesModeShowCPU)
 					setTextLabelCPU(null, mTVCPUAMP, mSR.getCPUAMP());
 				else setTextLabelCPU(null, mTVCPUAMP, null, mSR.getMemoryAM());
-
+				
 				setTextLabelMemory(mTVMemUsed, mTVMemUsedP, mSR.getMemUsed());
 				setTextLabelMemory(mTVMemAvailable, mTVMemAvailableP, mSR.getMemAvailable());
 				setTextLabelMemory(mTVMemFree, mTVMemFreeP, mSR.getMemFree());
@@ -118,13 +122,13 @@ public class ActivityMain extends Activity {
 			mThread = new Thread() {
 				@Override
 				public void run() {
-					Canvas canvas = null;
+					Canvas canvas;
 					if (!canvasLocked) { // http://stackoverflow.com/questions/9792446/android-java-lang-illegalargumentexception
 						canvas = mVG.lockCanvas();
 						if (canvas != null) {
 							canvasLocked = true;
 							mVG.onDrawCustomised(canvas, mThread);
-
+							
 							// https://github.com/AntonioRedondo/AnotherMonitor/issues/1
 							// http://stackoverflow.com/questions/23893813/canvas-restore-causing-underflow-exception-in-very-rare-cases
 							try {
@@ -132,7 +136,7 @@ public class ActivityMain extends Activity {
 							} catch (IllegalStateException e) {
 								Log.w("Activity main: ", e.getMessage());
 							}
-
+							
 							canvasLocked = false;
 						}
 					}
@@ -170,16 +174,16 @@ public class ActivityMain extends Activity {
 			setIconRecording();
 			
 			mTVMemTotal.setText(mFormat.format(mSR.getMemTotal()) + C.kB);
-
+			
 			switchParameter(cpuTotal, mLCPUTotal);
 			switchParameter(cpuAM, mLCPUAM);
-
+			
 			switchParameter(memUsed, mLMemUsed);
 			switchParameter(memAvailable, mLMemAvailable);
 			switchParameter(memFree, mLMemFree);
 			switchParameter(cached, mLCached);
 			switchParameter(threshold, mLThreshold);
-
+			
 			mHandler.removeCallbacks(drawRunnable);
 			mHandler.post(drawRunnable);
 			
@@ -190,7 +194,7 @@ public class ActivityMain extends Activity {
 				onActivityResult(1, 1, tempIntent);
 				tempIntent = null;
 			} else onActivityResult(1, 1, null);
-
+			
 			if (Build.VERSION.SDK_INT >= 16) {
 				mLProcessContainer.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@SuppressWarnings("deprecation")
@@ -216,7 +220,7 @@ public class ActivityMain extends Activity {
 			mSR = null;
 		}
 	};
-
+	
 	private BroadcastReceiver receiverSetIconRecord = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context context, Intent intent) {
@@ -252,10 +256,10 @@ public class ActivityMain extends Activity {
 		intervalRead = mPrefs.getInt(C.intervalRead, C.defaultIntervalUpdate);
 		intervalUpdate = mPrefs.getInt(C.intervalUpdate, C.defaultIntervalUpdate);
 		intervalWidth = mPrefs.getInt(C.intervalWidth, C.defaultIntervalWidth);
-
+		
 		cpuTotal = mPrefs.getBoolean(C.cpuTotal, true);
 		cpuAM = mPrefs.getBoolean(C.cpuAM, true);
-
+		
 		memUsed = mPrefs.getBoolean(C.memUsed, true);
 		memAvailable = mPrefs.getBoolean(C.memAvailable, true);
 		memFree = mPrefs.getBoolean(C.memFree, false);
@@ -269,14 +273,14 @@ public class ActivityMain extends Activity {
 		sD = res.getDisplayMetrics().density;
 		orientation = res.getConfiguration().orientation;
 		statusBarHeight = res.getDimensionPixelSize(res.getIdentifier(C.sbh, C.dimen, C.android));
-
+		
 		final SeekBar mSBWidth = (SeekBar) findViewById(R.id.SBIntervalWidth);
 		if (savedInstanceState != null && !savedInstanceState.isEmpty() && savedInstanceState.getInt(C.orientation) != orientation)
 			orientationChanged = true;
-
-
+		
+		
 		mVG = (ViewGraphic) findViewById(R.id.ANGraphic);
-
+		
 		graphicMode = mPrefs.getInt(C.graphicMode, C.graphicModeShowMemory);
 		mVG.setGraphicMode(graphicMode);
 		mBHide = (ToggleButton) findViewById(R.id.BHideMemory);
@@ -284,14 +288,14 @@ public class ActivityMain extends Activity {
 			@Override
 			public void onClick(View v) {
 				graphicMode = graphicMode == C.graphicModeShowMemory ? C.graphicModeHideMemory : C.graphicModeShowMemory;
-				mPrefs.edit().putInt(C.graphicMode, graphicMode).commit();
+				mPrefs.edit().putInt(C.graphicMode, graphicMode).apply();
 				mVG.setGraphicMode(graphicMode);
 				mBHide.setChecked(graphicMode == C.graphicModeShowMemory ? false : true);
 				mHandlerVG.post(drawRunnableGraphic);
 			}
 		});
 		mBHide.setChecked(graphicMode == C.graphicModeShowMemory ? false : true);
-
+		
 		processesMode = mPrefs.getInt(C.processesMode, C.processesModeShowCPU);
 		mVG.setProcessesMode(processesMode);
 		mBMemory = (Button) findViewById(R.id.BMemory);
@@ -299,7 +303,7 @@ public class ActivityMain extends Activity {
 			@Override
 			public void onClick(View v) {
 				processesMode = processesMode == C.processesModeShowCPU ? C.processesModeShowMemory : C.processesModeShowCPU;
-				mPrefs.edit().putInt(C.processesMode, processesMode).commit();
+				mPrefs.edit().putInt(C.processesMode, processesMode).apply();
 				mBMemory.setText(processesMode == 0 ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
 				mVG.setProcessesMode(processesMode);
 				mHandlerVG.post(drawRunnableGraphic);
@@ -308,8 +312,8 @@ public class ActivityMain extends Activity {
 			}
 		});
 		mBMemory.setText(processesMode == 0 ? getString(R.string.w_main_memory) : getString(R.string.p_cpuusage));
-
-
+		
+		
 		mLTopBar = (LinearLayout) findViewById(R.id.LTopBar);
 		mLGraphicSurface = (FrameLayout) findViewById(R.id.LGraphicButton);
 		
@@ -348,7 +352,7 @@ public class ActivityMain extends Activity {
 		mLParent = (LinearLayout) findViewById(R.id.LParent);
 		
 		mLButtonMenu = (ImageView) findViewById(R.id.LButtonMenu);
-
+		
 //		if (!ViewConfiguration.get(this).hasPermanentMenuKey()) {
 			mLButtonMenu.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -397,15 +401,15 @@ public class ActivityMain extends Activity {
 		mPWMenu = new PopupWindow(mLMenu, (int) (260*sD), WindowManager.LayoutParams.WRAP_CONTENT, true);
 		mPWMenu.setAnimationStyle(R.style.Animations_PopDownMenu);
 		mPWMenu.setBackgroundDrawable(new BitmapDrawable()); // Without this line ACTION_OUTSIDE events are not triggered.
-		mPWMenu.getContentView().setOnKeyListener(new View.OnKeyListener() {        
-		    @Override
-		    public boolean onKey(View v, int keyCode, KeyEvent event) {
-		        if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0 && event.getAction() == KeyEvent.ACTION_UP) {
-		        	mPWMenu.dismiss();
-		            return true;
-		        }
-		        return false;
-		    }
+		mPWMenu.getContentView().setOnKeyListener(new View.OnKeyListener() {
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (keyCode == KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0 && event.getAction() == KeyEvent.ACTION_UP) {
+					mPWMenu.dismiss();
+					return true;
+				}
+				return false;
+			}
 		});
 		
 		mLMenu.findViewById(R.id.LHelp).setOnClickListener(new View.OnClickListener() {
@@ -534,7 +538,7 @@ public class ActivityMain extends Activity {
 				return true;
 			}
 		});
-
+		
 		mVG.setOpaque(false); // http://stackoverflow.com/questions/18993355/semi-transparent-textureviews-not-working
 		
 		// http://stackoverflow.com/questions/12688409/android-textureview-canvas-drawing-problems
@@ -554,7 +558,7 @@ public class ActivityMain extends Activity {
 						invalidate();
 					}
 				});*/
-
+				
 //				mHandlerVG.post(drawRunnableGraphic);
 			}
 			
@@ -669,12 +673,10 @@ public class ActivityMain extends Activity {
 		mSBUpdate.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				
 			}
 			
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-				
 			}
 			
 			@Override
@@ -702,12 +704,10 @@ public class ActivityMain extends Activity {
 		mSBWidth.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 			@Override
 			public void onStopTrackingTouch(SeekBar seekBar) {
-				
 			}
 			
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
-				
 			}
 			
 			@Override
@@ -774,7 +774,7 @@ public class ActivityMain extends Activity {
 							process.put(C.pFinalValue, new ArrayList<Float>());
 							process.put(C.pTPD, new ArrayList<Integer>());
 						}
-
+					
 					mSR.getMemUsed().clear();
 					mSR.getMemAvailable().clear();
 					mSR.getMemFree().clear();
@@ -795,9 +795,12 @@ public class ActivityMain extends Activity {
 						.putInt(C.intervalRead, intervalRead)
 						.putInt(C.intervalUpdate, intervalUpdate)
 						.putInt(C.intervalWidth, intervalWidth)
-						.commit();
+						.apply();
 			}
 		});
+		
+		if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+			ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.WRITE_EXTERNAL_STORAGE }, C.storagePermission);
 		
 		if (savedInstanceState != null && !savedInstanceState.isEmpty()) {
 			processesMode = savedInstanceState.getInt(C.processesMode);
@@ -826,7 +829,7 @@ public class ActivityMain extends Activity {
 		
 //		if (true) {
 		if (mPrefs.getBoolean(C.welcome, true)) {
-			mPrefs.edit().putLong(C.welcomeDate, Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis()).commit();
+			mPrefs.edit().putLong(C.welcomeDate, Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis()).apply();
 			ViewStub v = (ViewStub) findViewById(R.id.VSWelcome);
 			if (v != null) { // This is to avoid a null pointer when the second time this code is executed (findViewById() returns the view only once)
 				mLWelcome = (LinearLayout) v.inflate();
@@ -839,7 +842,7 @@ public class ActivityMain extends Activity {
 				(mLWelcome.findViewById(R.id.BHint)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mPrefs.edit().putBoolean(C.welcome, false).commit();
+						mPrefs.edit().putBoolean(C.welcome, false).apply();
 						mLWelcome.animate().setDuration(animDuration).setListener(new AnimatorListenerAdapter() {
 							@Override
 							public void onAnimationEnd(Animator animation) {
@@ -859,7 +862,7 @@ public class ActivityMain extends Activity {
 				mLWelcome.animate().setStartDelay(delayDur).setDuration(animDur).alpha(1).translationYBy(15*sD);
 			}
 		}
-
+		
 		long time = Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis();
 		
 //		if (true) {
@@ -867,7 +870,7 @@ public class ActivityMain extends Activity {
 				&& mPrefs.getBoolean(C.feedbackFirstTime, true))
 				|| ((float) (time - mPrefs.getLong(C.welcomeDate, 1)) / (24 * 60 * 60 * 1000) > 90)
 				&& !mPrefs.getBoolean(C.feedbackDone, false)) {
-			mPrefs.edit().putBoolean(C.feedbackFirstTime, false).commit();
+			mPrefs.edit().putBoolean(C.feedbackFirstTime, false).apply();
 			ViewStub v = (ViewStub) findViewById(R.id.VSFeedback);
 			if (v != null) { // This is to avoid a null pointer when the second time this code is executed (findViewById() returns the view only once)
 				mLFeedback = (LinearLayout) v.inflate();
@@ -880,7 +883,7 @@ public class ActivityMain extends Activity {
 				(mLFeedback.findViewById(R.id.BFeedbackYes)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mPrefs.edit().putBoolean(C.feedbackDone, true).commit();
+						mPrefs.edit().putBoolean(C.feedbackDone, true).apply();
 						try {
 							startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(C.marketDetails + getPackageName()))
 									.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET | Intent.FLAG_ACTIVITY_MULTIPLE_TASK));
@@ -901,7 +904,7 @@ public class ActivityMain extends Activity {
 				(mLFeedback.findViewById(R.id.BFeedbackDone)).setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						mPrefs.edit().putBoolean(C.feedbackDone, true).commit();
+						mPrefs.edit().putBoolean(C.feedbackDone, true).apply();
 						Toast.makeText(ActivityMain.this, getString(R.string.w_main_feedback_done_thanks), Toast.LENGTH_SHORT).show();
 						mLFeedback.animate().setDuration(animDuration).setListener(new AnimatorListenerAdapter() {
 							@Override
@@ -922,7 +925,7 @@ public class ActivityMain extends Activity {
 								mLFeedback = null;
 							}
 						}).setStartDelay(0).alpha(0).translationYBy(-15*sD);
-						mPrefs.edit().putLong(C.welcomeDate, Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis()).commit();
+						mPrefs.edit().putLong(C.welcomeDate, Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis()).apply();
 						Toast.makeText(ActivityMain.this, getString(R.string.w_main_feedback_no_remind), Toast.LENGTH_LONG).show();
 					}
 				});
@@ -945,11 +948,11 @@ public class ActivityMain extends Activity {
 	private void showSettings() {
 		settingsShown = true;
 		mLGraphicSurface.setEnabled(false);
-
+		
 		// By changing the panel position in this way you can keep the background height unchanged but cropped and attached to the top of the panel.
 		// This is important if you're using an image as background.
 //		mLSettings.animate().setDuration(animTime).setInterpolator(new AccelerateDecelerateInterpolator()).translationY(0);
-
+		
 		// In this way the background height will progressively be bigger, it will enlarge from 0 to the real size.
 		// Now this doesn't matter because the background is a solid color.
 		ValueAnimator va = ValueAnimator.ofInt(0, settingsHeight);
@@ -1004,8 +1007,8 @@ public class ActivityMain extends Activity {
 				.putBoolean(C.cached, cached)
 				.putBoolean(C.threshold, threshold)
 				
-				.commit();
-
+				.apply();
+		
 		mVG.setParameters(cpuTotal, cpuAM, memUsed, memAvailable, memFree, cached, threshold);
 		
 		ImageView icon = (ImageView) labelRow.getChildAt(0);
@@ -1127,7 +1130,7 @@ public class ActivityMain extends Activity {
 			mLButtonRecord.setImageResource(R.drawable.button_start_record);
 		}
 	}
-
+	
 	
 	
 	
@@ -1170,7 +1173,7 @@ public class ActivityMain extends Activity {
 					// Integer	   C.workBefore
 					// List<Sring> C.finalValue
 					// Boolean	   C.pDead
-
+					
 					// Boolean	   C.pCheckBox
 			List<Map<String, Object>> mListSelectedProv = null;
 			if (data != null) {
@@ -1240,11 +1243,11 @@ public class ActivityMain extends Activity {
 							Intent i;
 							PackageManager manager = getPackageManager();
 							try {
-							    i = manager.getLaunchIntentForPackage((String) process.get(C.pPackage));
-							    if (i == null)
-							        throw new PackageManager.NameNotFoundException();
-							    i.addCategory(Intent.CATEGORY_LAUNCHER);
-							    startActivity(i);
+								i = manager.getLaunchIntentForPackage((String) process.get(C.pPackage));
+								if (i == null)
+									throw new PackageManager.NameNotFoundException();
+								i.addCategory(Intent.CATEGORY_LAUNCHER);
+								startActivity(i);
 							} catch (PackageManager.NameNotFoundException e) {
 							}*/
 						}
@@ -1260,14 +1263,14 @@ public class ActivityMain extends Activity {
 					pIcon.setImageDrawable(d);
 					
 					int colour = (Integer) process.get(C.pColour);
-
+					
 					TextView pName = (TextView) l.findViewById(R.id.TVpAppName);
 					pName.setText((String) process.get(C.pAppName));
 					pName.setTextColor(colour);
 					
 					TextView pId = (TextView) l.findViewById(R.id.TVpName);
 					pId.setText("Pid: " + process.get(C.pId));
-
+					
 					TextView pUsage = (TextView) l.findViewById(R.id.TVpPercentage);
 					pUsage.setTextColor(colour);
 					
@@ -1289,7 +1292,7 @@ public class ActivityMain extends Activity {
 							mLWelcome.findViewById(R.id.BHint).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									mPrefs.edit().putBoolean(C.firstTimeProcesses, false).commit();
+									mPrefs.edit().putBoolean(C.firstTimeProcesses, false).apply();
 									mLWelcome.animate().setDuration(animDuration).setListener(new AnimatorListenerAdapter() {
 										@Override
 										public void onAnimationEnd(Animator animation) {
@@ -1393,8 +1396,8 @@ public class ActivityMain extends Activity {
 			mThread = null;
 		}
 		mHandler.removeCallbacks(drawRunnable);
-	    if (mPWMenu.isShowing()) // To avoid android.view.WindowLeaked exception
-	    	mPWMenu.dismiss();
+		if (mPWMenu.isShowing()) // To avoid android.view.WindowLeaked exception
+			mPWMenu.dismiss();
 		unregisterReceiver(receiverSetIconRecord);
 		unregisterReceiver(receiverDeadProcess);
 		unregisterReceiver(receiverFinish);
@@ -1408,7 +1411,7 @@ public class ActivityMain extends Activity {
 	@Override
 	public void onBackPressed() {
 		if (mLFeedback != null && mLFeedback.getAlpha() != 0) {
-			mPrefs.edit().putLong(C.welcomeDate, Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis()).commit();
+			mPrefs.edit().putLong(C.welcomeDate, Calendar.getInstance(TimeZone.getTimeZone(C.europeLondon)).getTimeInMillis()).apply();
 			Toast.makeText(ActivityMain.this, getString(R.string.w_main_feedback_no_remind), Toast.LENGTH_LONG).show();
 			mLFeedback.animate().setDuration(animDuration).setListener(new AnimatorListenerAdapter() {
 				@Override
@@ -1420,7 +1423,7 @@ public class ActivityMain extends Activity {
 			return;
 		}
 		if (mLWelcome != null && mLWelcome.getAlpha() != 0) {
-			mPrefs.edit().putBoolean(C.welcome, false).commit();
+			mPrefs.edit().putBoolean(C.welcome, false).apply();
 			mLWelcome.animate().setDuration(animDuration).setListener(new AnimatorListenerAdapter() {
 				@Override
 				public void onAnimationEnd(Animator animation) {
@@ -1445,7 +1448,7 @@ public class ActivityMain extends Activity {
 	
 	@Override
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
-        if (keyCode ==  KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
+		if (keyCode ==  KeyEvent.KEYCODE_MENU && event.getRepeatCount() == 0) {
 				mPWMenu.setAnimationStyle(R.style.Animations_PopDownMenuBottom);
 				mPWMenu.showAtLocation(mLParent, Gravity.BOTTOM | Gravity.CENTER,  0, 0);
 			return true;
@@ -1453,4 +1456,14 @@ public class ActivityMain extends Activity {
 		return super.onKeyUp(keyCode, event);
 	}
 	
+	
+	
+	
+	
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		if (requestCode == C.storagePermission && PackageManager.PERMISSION_DENIED == grantResults[0]) {
+			Toast.makeText(ActivityMain.this, getString(R.string.w_main_storage_permission), Toast.LENGTH_LONG).show();
+		}
+	}
 }

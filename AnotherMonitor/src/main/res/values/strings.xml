@@ -7,7 +7,7 @@
 	<string name="notify_read2">Reading values in the background</string>
 	<string name="notify_record">AnotherMonitor is recording values</string>
 	<string name="notify_record2">Recording values in the background</string>
-	<string name="notify_toast_saved">saved in the folder \'AnotherMonitor\'.</string>
+	<string name="notify_toast_saved">saved in the folder</string>
 	<string name="notify_toast_error">An error happened when saving the CSV file:</string>
 	<string name="notify_toast_error_2">It hasn\'t been possible to start recording:</string>
     <string name="w_main_choose_process">Choose other process(es)</string>
@@ -27,15 +27,19 @@
     <string name="w_main_hint_title">FYI</string>
     <string name="w_main_hint">Enable and disable parameters shown on the graph by pressing its label.
         \n\nYou can open the Settings panel by clicking the graph.</string>
+    <string name="w_main_storage_permission">AnotherMonitor cannot record values if you don\'t grant Storage permission.
+        Restart the app to show the permission prompt again.</string>
     <string name="w_main_mp_button_text">Alright</string>
     <string name="w_processes_dead">DEAD</string>
     <string name="w_processes_dead_notification">Process dead</string>
     <string name="w_processes_title">Processes</string>
     <string name="w_processes_empty">Ouch! There was some problem when retrieving the system processes.</string>
     <string name="w_processes_android_51_problem"><big><b>Ouch!</b></big>
-		\n\nFor Android 5.1.1+ the processes list doesn\'t work anymore.
-		It\'s due to an undocumented Android API change. Still trying to find out some workaround.
-		\n\nMore info: http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag</string>
+		\n\nFor devices with Android 7.0+ the processes list doesn\'t work anymore.
+		It\'s due to an undocumented Android API level 24 change with no alternative solution so far.
+		\n\nMore info:
+	    \n- https://stackoverflow.com/q/38590140/372899
+	    \n- https://issuetracker.google.com/issues/37091475</string>
     <string name="w_processes_first_time">You can remove a process from the list by performing a long click on its label.</string>
 	<string name="w_processes_select_some_process">Please select some process(es).</string>
     <string name="w_help_title">Some explanations?</string>
@@ -149,9 +153,9 @@
 	<string name="p_percentage">-%</string>
 	<string name="about_title">About</string>
 	<string name="about_text_title">
-		<big><b>AnotherMonitor</b> v3.0.6</big>
+		<big><b>AnotherMonitor</b> v3.1.0</big>
 		\nhttps://github.com/AntonioRedondo/AnotherMonitor
-		\n\n© 2010&#8211;2016 Antonio Redondo
+		\n\n© 2010&#8211;2017 Antonio Redondo
 		\nhttp://antonioredondo.com
 		\n\nPublished under the
 		\nGNU General Public License v3

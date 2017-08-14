@@ -1,7 +1,7 @@
 /* 
- * 2010-2015 (C) Antonio Redondo
+ * 2010-2017 (C) Antonio Redondo
  * http://antonioredondo.com
- * https://github.com/AntonioRedondo/AnotherMonitor
+ * http://github.com/AntonioRedondo/AnotherMonitor
  *
  * Code under the terms of the GNU General Public License v3.
  *
@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Notification;
@@ -37,16 +38,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.os.Binder;
-import android.os.Debug;
+import android.os.*;
 import android.os.Debug.MemoryInfo;
-import android.os.Environment;
-import android.os.Handler;
-import android.os.IBinder;
-import android.os.Looper;
 import android.os.Process;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -78,7 +76,7 @@ public class ServiceReader extends Service {
 		@Override   
 		public void run() {
 			// The service makes use of an explicit Thread instead of a Handler because with the Threat the code is executed more synchronously.
-			// However the ViewGraphic is drawed with a Handler because the drawing code must be executed in the UI thread.
+			// However the ViewGraphic is drew with a Handler because the drawing code must be executed in the UI thread.
 			Thread thisThread = Thread.currentThread();
 			while (readThread == thisThread) {
 				read();
@@ -93,9 +91,9 @@ public class ServiceReader extends Service {
 				}
 				
 				// The Runnable can be suspended and resumed with the below code:
-//		        threadSuspended = !threadSuspended;
-//		        if (!threadSuspended)
-//		            notify();
+//				threadSuspended = !threadSuspended;
+//				if (!threadSuspended)
+//					notify();
 			}
 		}
 		
@@ -107,28 +105,28 @@ public class ServiceReader extends Service {
 		
 	};
 	private volatile Thread readThread = new Thread(readRunnable, C.readThread);
-    private BroadcastReceiver receiverStartRecord = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-        	startRecord();
-        	sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-        }
-    },
-    receiverStopRecord = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-        	stopRecord();
-        	sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-        }
-    },
-    receiverClose = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-        	sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
-        	sendBroadcast(new Intent(C.actionFinishActivity));
-        	stopSelf();
-        }
-    };
+	private BroadcastReceiver receiverStartRecord = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			startRecord();
+			sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+		}
+	},
+	receiverStopRecord = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			stopRecord();
+			sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+		}
+	},
+	receiverClose = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			sendBroadcast(new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS));
+			sendBroadcast(new Intent(C.actionFinishActivity));
+			stopSelf();
+		}
+	};
 	
 	
 	
@@ -160,7 +158,7 @@ public class ServiceReader extends Service {
 		am = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
 		amMI = am.getProcessMemoryInfo(new int[]{ pId });
 		mi = new ActivityManager.MemoryInfo();
-
+		
 		mPrefs = getSharedPreferences(getString(R.string.app_name) + C.prefs, MODE_PRIVATE);
 		intervalRead = mPrefs.getInt(C.intervalRead, C.defaultIntervalRead);
 		intervalUpdate = mPrefs.getInt(C.intervalUpdate, C.defaultIntervalUpdate);
@@ -174,7 +172,7 @@ public class ServiceReader extends Service {
 		registerReceiver(receiverClose, new IntentFilter(C.actionClose));
 		
 		mNM = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-
+		
 		PendingIntent contentIntent =  TaskStackBuilder.create(this)
 //				.addParentStack(ActivityMain.class)
 //				.addNextIntent(new Intent(this, ActivityMain.class))
@@ -183,8 +181,8 @@ public class ServiceReader extends Service {
 		PendingIntent pIStartRecord = PendingIntent.getBroadcast(this, 0, new Intent(C.actionStartRecord), PendingIntent.FLAG_UPDATE_CURRENT);
 		PendingIntent pIStopRecord = PendingIntent.getBroadcast(this, 0, new Intent(C.actionStopRecord), PendingIntent.FLAG_UPDATE_CURRENT);
 		PendingIntent pIClose = PendingIntent.getBroadcast(this, 0, new Intent(C.actionClose), PendingIntent.FLAG_UPDATE_CURRENT);
-
-		mNotificationRead = new Notification.Builder(this)
+		
+		mNotificationRead = new NotificationCompat.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
 				.setContentText(getString(R.string.notify_read2))
 //				.setTicker(getString(R.string.notify_read))
@@ -193,12 +191,12 @@ public class ServiceReader extends Service {
 				.setWhen(0) // Removes the time
 				.setOngoing(true)
 				.setContentIntent(contentIntent) // PendingIntent.getActivity(this, 0, new Intent(this, ActivityMain.class), 0)
-				.setStyle(new Notification.BigTextStyle().bigText(getString(R.string.notify_read2)))
-		        .addAction(R.drawable.icon_circle_sb, getString(R.string.menu_record), pIStartRecord)
-		        .addAction(R.drawable.icon_times_ai, getString(R.string.menu_close), pIClose)
+				.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notify_read2)))
+				.addAction(R.drawable.icon_circle_sb, getString(R.string.menu_record), pIStartRecord)
+				.addAction(R.drawable.icon_times_ai, getString(R.string.menu_close), pIClose)
 				.build();
 		
-		mNotificationRecord = new Notification.Builder(this)
+		mNotificationRecord = new NotificationCompat.Builder(this)
 				.setContentTitle(getString(R.string.app_name))
 				.setContentText(getString(R.string.notify_record2))
 				.setTicker(getString(R.string.notify_record))
@@ -207,13 +205,13 @@ public class ServiceReader extends Service {
 				.setWhen(0)
 				.setOngoing(true)
 				.setContentIntent(contentIntent)
-				.setStyle(new Notification.BigTextStyle().bigText(getString(R.string.notify_record2)))
-		        .addAction(R.drawable.icon_stop_sb, getString(R.string.menu_stop_record), pIStopRecord)
-		        .addAction(R.drawable.icon_times_ai, getString(R.string.menu_close), pIClose)
+				.setStyle(new NotificationCompat.BigTextStyle().bigText(getString(R.string.notify_record2)))
+				.addAction(R.drawable.icon_stop_sb, getString(R.string.menu_stop_record), pIStopRecord)
+				.addAction(R.drawable.icon_times_ai, getString(R.string.menu_close), pIClose)
 				.build();
-
+		
 //		mNM.notify(0, mNotificationRead);
-		startForeground(10, mNotificationRead); // If not the AM service will be killed easily when a heavy-use memory app (like a browser or Google Maps) goes in the foreground
+		startForeground(10, mNotificationRead); // If not the AM service will be easily killed when a heavy-use memory app (like a browser or Google Maps) goes onto the foreground
 	}
 	
 	
@@ -274,7 +272,7 @@ public class ServiceReader extends Service {
 					threshold.remove(threshold.size() - 1);
 				}
 				if (mListSelected != null && !mListSelected.isEmpty()) {
-					List<Integer> l = (List<Integer>) ((Map<String, Object>) mListSelected.get(0)).get(C.pFinalValue);
+					List<Integer> l = (List<Integer>) (mListSelected.get(0)).get(C.pFinalValue);
 					if (l != null && l.size() >= maxSamples)
 						for (Map<String, Object> m : mListSelected) {
 							((List<Integer>) m.get(C.pFinalValue)).remove(l.size() - 1);
@@ -328,11 +326,13 @@ public class ServiceReader extends Service {
 //			CPU usage percents calculation. It is possible negative values or values higher than 100% may appear.
 //			http://stackoverflow.com/questions/1420426
 //			http://kernel.org/doc/Documentation/filesystems/proc.txt
-			reader = new BufferedReader(new FileReader("/proc/stat"));
-			sa = reader.readLine().split("[ ]+", 9);
-			work = Long.parseLong(sa[1]) + Long.parseLong(sa[2]) + Long.parseLong(sa[3]);
-			total = work + Long.parseLong(sa[4]) + Long.parseLong(sa[5]) + Long.parseLong(sa[6]) + Long.parseLong(sa[7]);
-			reader.close();
+			if (Build.VERSION.SDK_INT < 26) {
+				reader = new BufferedReader(new FileReader("/proc/stat"));
+				sa = reader.readLine().split("[ ]+", 9);
+				work = Long.parseLong(sa[1]) + Long.parseLong(sa[2]) + Long.parseLong(sa[3]);
+				total = work + Long.parseLong(sa[4]) + Long.parseLong(sa[5]) + Long.parseLong(sa[6]) + Long.parseLong(sa[7]);
+				reader.close();
+			}
 			
 			reader = new BufferedReader(new FileReader("/proc/" + pId + "/stat"));
 			sa = reader.readLine().split("[ ]+", 18);
@@ -357,7 +357,7 @@ public class ServiceReader extends Service {
 							p.put(C.pDead, Boolean.TRUE);
 							Intent intent = new Intent(C.actionDeadProcess);
 							intent.putExtra(C.process, (Serializable) p);
-					    	sendBroadcast(intent);
+							sendBroadcast(intent);
 						}
 					}
 				}
@@ -403,7 +403,7 @@ public class ServiceReader extends Service {
 				if (mListSelected != null && !mListSelected.isEmpty()) {
 					int workPT = 0;
 					List<Float> l;
-
+					
 					synchronized (mListSelected) {
 						for (Map<String, Object> p : mListSelected) {
 							if (p.get(C.workBefore) == null)
@@ -459,7 +459,6 @@ public class ServiceReader extends Service {
 	@SuppressWarnings("unchecked")
 	private void record() {
 		if (mW == null) {
-			
 			File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AnotherMonitor");
 			dir.mkdirs();
 			mFile = new File(dir, new StringBuilder().append(getString(R.string.app_name)).append("Record-").append(getDate()).append(".csv").toString());
@@ -489,7 +488,7 @@ public class ServiceReader extends Service {
 						  .append(",").append(p.get(C.pAppName)).append(" Memory (kB)");
 				
 				sb.append(",,Memory used (kB),Memory available (MemFree+Cached) (kB),MemFree (kB),Cached (kB),Threshold (kB)");
-			
+				
 				mW.write(sb.toString());
 				mNM.notify(10, mNotificationRecord);
 				topRow = false;
@@ -516,13 +515,21 @@ public class ServiceReader extends Service {
 			mW.write(sb.toString());
 		} catch (IOException e) {
 			notifyError(e);
-			return;
 		}
 	}
 	
 	
 	
 	
+	
+	void startRecord() {
+		if (Build.VERSION.SDK_INT >= 23 && checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+			Toast.makeText(this, getString(R.string.w_main_storage_permission), Toast.LENGTH_LONG).show();
+			return;
+		}
+		recording = true;
+		sendBroadcast(new Intent(C.actionSetIconRecord));
+	}
 	
 	void stopRecord() {
 		recording = false;
@@ -538,13 +545,18 @@ public class ServiceReader extends Service {
 			sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE).setData(Uri.fromFile(mFile)));
 			
 			Toast.makeText(this, new StringBuilder().append(getString(R.string.app_name)).append("Record-").append(getDate()).append(".csv ")
-					.append(getString(R.string.notify_toast_saved)), Toast.LENGTH_LONG).show();
+					.append(getString(R.string.notify_toast_saved))
+					.append(" " + Environment.getExternalStorageDirectory().getAbsolutePath() + "/AnotherMonitor"), Toast.LENGTH_LONG).show();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Toast.makeText(this, getString(R.string.notify_toast_error) + " " + e.getMessage(), Toast.LENGTH_LONG).show();
 		}
 		topRow = true;
 		mNM.notify(10, mNotificationRead);
+	}
+	
+	boolean isRecording() {
+		return recording;
 	}
 	
 	
@@ -557,9 +569,9 @@ public class ServiceReader extends Service {
 			stopRecord();
 		else {
 			recording = false;
-        	sendBroadcast(new Intent(C.actionSetIconRecord));
-        	
-        	// http://stackoverflow.com/questions/3875184/cant-create-handler-inside-thread-that-has-not-called-looper-prepare
+			sendBroadcast(new Intent(C.actionSetIconRecord));
+			
+			// http://stackoverflow.com/questions/3875184/cant-create-handler-inside-thread-that-has-not-called-looper-prepare
 			new Handler(Looper.getMainLooper()).post(new Runnable() {
 				@Override
 				public void run() {
@@ -625,19 +637,6 @@ public class ServiceReader extends Service {
 					Log.i(getString(R.string.w_processes_dead_notification), (String) process.get(C.pName));
 				}
 		}
-	}
-	
-	
-	
-	
-	
-	void startRecord() {
-		recording = true;
-    	sendBroadcast(new Intent(C.actionSetIconRecord));
-	}
-	
-	boolean isRecording() {
-		return recording;
 	}
 	
 	
