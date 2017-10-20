@@ -44,9 +44,9 @@ For devices running Android 5.1.1 it is not possible any more to retrieve the pr
 In Android 7.0 Google once again has made undocumented changes and has significantly restricted access to the `proc` file system. This means that since this new API level it is not possible anymore to retrieve processes info. AnotherMonitor running on devices with Android 7.0 will only show total CPU usage, AnotherMonitor CPU usage and memory usage, but not CPU usage for other processes. Running the app on a rooted device does not make difference. More info on [File system changes in Android Nougat - Stack Overflow](https://stackoverflow.com/questions/38590140/file-system-changes-in-android-nougat). [Star this Android issue](https://issuetracker.google.com/issues/37091475) to push Google to implement an alternative API.
 
 
-#### Retrieving processes info since Android O 8.0 (API 26, Autunm 2017)
+#### Retrieving processes info since Android Oreo 8.0 (API 26, August 2017)
 
-In Android 8.0 Google once again has made more undocumented changes and has further restricted the access to the `proc` file system. Until now it was possible to at least get process info of the process running the app and total CPU usage. This does not work any more. AnotherMonitor running on devices with Android 8.0 will only show memory usage, but not total CPU usage or CPU usage for any process, including the own app process. Running the app on a rooted device does not make difference.
+In Android 8.0 Google has further restricted access to the `proc` file system. Until now it was possible to at least get process info of the process running the app and total CPU usage. This does not work any more. AnotherMonitor running on devices with Android 8.0 will only show memory usage, but not total CPU usage or CPU usage for any process, including the own app process. Running the app on a rooted device does not make difference.
 
 
 ## Resolving dependencies
