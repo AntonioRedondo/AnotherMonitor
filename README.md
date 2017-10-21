@@ -11,9 +11,9 @@ AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 
 The app is released on Google Play: https://play.google.com/store/apps/details?id=org.anothermonitor.
 
-## IMPORTANT NOTICE for Android 7.0+
+## IMPORTANT NOTICE for Android 7.0+ users
 
-Due to undocumented changes made by Google on Android 7.0 CPU usage information for processes others than the own AnotherMonitor will not be available (not even with root access). Rest of the app will work as usual. For devices with Android 8.0 AnotherMonitor will not even show the CPU usage of the own app process, just memory values. Read the below [Retriving processes info since Android 7.0](#retrieving-processes-info-since-android-nougat-70-api-24-august-2016) for more info.
+Due to undocumented changes made by Google, on Android 7.0 CPU usage information for processes others than the own AnotherMonitor one will not be available (not even with root access). Rest of the app will work normally. For devices with Android 8.0 AnotherMonitor will not even show the CPU usage of the own app process. Read the below [Retriving processes info since Android 7.0](#retrieving-processes-info-since-android-nougat-70-api-24-august-2016) for more info.
 
 ## Details
 
