@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="app_name">AnotherMonitor</string>
+  <string name="google_play_app_site">https://play.google.com/store/apps/details?id=org.anothermonitor</string>
+  <string name="anim_time">100</string>
+  <string name="notify_read">AnotherMonitor читает данные</string>
+  <string name="notify_read2">Чтение данных в фоновом режиме</string>
+  <string name="notify_record">AnotherMonitor записывает данные</string>
+  <string name="notify_record2">Запись данных в фоновом режиме</string>
+  <string name="notify_toast_saved">сохранено в папке</string>
+  <string name="notify_toast_error">При сохранении CSV файла возникла ошибка:</string>
+  <string name="notify_toast_error_2">Не удалось начать запись:</string>
+  <string name="w_main_choose_process">Выбрать другие процессы</string>
+  <string name="w_main_processes">Процессы</string>
+  <string name="w_main_memory">Память</string>
+  <string name="w_main_hide">Скр.</string>
+  <string name="w_main_remove_all">Удалить все</string>
+  <string name="w_main_feedback_title">Секундочку ;)</string>
+  <string name="w_main_feedback_text">Вы уже некоторое время используете AnotherMonitor.
+        \n\nОтзывы пользователей оказывают неоценимую помощь в улучшении приложения. Не хотели бы вы оценить приложение на странице Google Play? (Это займет не более 30 секнуд).</string>
+  <string name="w_main_feedback_yes">Да</string>
+  <string name="w_main_feedback_done">Уже оценено</string>
+  <string name="w_main_feedback_done_thanks">Спасибо за оценку!</string>
+  <string name="w_main_feedback_no">Нет</string>
+  <string name="w_main_feedback_no_remind">Очередное напоминание сработает через 3 месяца.</string>
+  <string name="w_main_welcome">Добро пожаловать!</string>
+  <string name="w_main_hint_title">Информация</string>
+  <string name="w_main_hint">Долгое нажатие на название параметра позволит включить или отключить его.
+        \n\nВы можете открыть меню настроек нажав на график.</string>
+  <string name="w_main_storage_permission">AnotherMonitor не сможет записать данные без полученного разрешения на запись.
+        Перезапустите приложение для повторного вызова запроса разрешения.</string>
+  <string name="w_main_mp_button_text">Понятно</string>
+  <string name="w_processes_dead">ЗАВЕРШЕН</string>
+  <string name="w_processes_dead_notification">Процесс завершен</string>
+  <string name="w_processes_title">Процессы</string>
+  <string name="w_processes_empty">Упс! При получение системного процесса возникла проблема.</string>
+  <string name="w_processes_android_51_problem"><big><b>Упс!</b></big>
+		\n\nДля устройств на Android 7.0 и выше список процессов больше не будет работать.
+		Это вызвано недокументированными изменениями в API 24, решение пока не найдено.
+		\n\nПодробности здесь:
+	    \n- https://stackoverflow.com/q/38590140/372899
+	    \n- https://issuetracker.google.com/issues/37091475</string>
+  <string name="w_processes_first_time">Вы можете удалить процесс из списка долгим нажатием на его названии.</string>
+  <string name="w_processes_select_some_process">Пожалуйста, выберите процесс(ы).</string>
+  <string name="w_help_title">Подробности</string>
+  <string name="w_help_text">Настройки приложения открываются нажатием на график в основном окне программы.
+        Вы можете изменить следующие параметры: \'Интервал чтения\', \'Интервал обновления\' и \'Ширина интервала\'.
+        \'Интервал чтения\' не может быть изменен если приложение записывает текущие данные.
+        \n\n<big><b>Процессы</b></big>
+        \n\nВы можете видеть общее использование CPU и памяти всеми процессами на текущий момент времени.
+		Если устройство имеет более одного ядра, будет отображаться суммарное использование ресурсов для всех ядер.
+		Добавляйте процессы для мониторинга кнопкой \'Выбрать другие процессы\'.
+        Процесс AnotherMonitor всегда отображается в списке. Переключайтесь между мониторингом CPU и памяти нажатием кнопки \'Память\'.
+        AnotherMonitor отображает объем памяти, предоставленной куче приложения.
+        Если Android завершает процесс из-за недостатка памяти
+        или процесс завершается сам по себе, будет отображена соответствующая метка.
+        Вы можете управлять отображением процесса нажатиями на его названии на графике.
+        Процесс может быть удален из списка долгим нажатием на его названии.
+        \n\nС целью получения информации об использовании CPU приложение читает содержимое файла \'/proc/stat\'.
+        \n\nБолее подробная информация:
+        \n- http://stackoverflow.com/questions/1420426/calculating-cpu-usage-of-a-process-in-linux
+        \n\n<big><b>Память</b></big>
+        \n\nAnotherMonitor отображает на экране самые важные параметры использования памяти, касающиеся как Linux, так и Android:
+        \n\n<b>Исп. память</b>: память, уже используемая системой.
+        \n\n<b>Доступ. память</b>: доступный объем памяти. Из-за особенностей работы ядра данное число не стоит воспринимать как строгое значение:
+        ощутимая часть из указанного объема памяти необходима самой системе для нормального функционирования. <b>Доступная память</b> является
+        суммой параметров <b>Свободная память</b> и <b>Кэш</b>.
+        \n\n<b>Своб. память</b>: сумма значений <b>LowFree</b> и <b>HighFree</b> (не отображаются на графике т.к. не несут пользу для разработчика).
+        По умолчанию данный параметр не отображается на графике.
+        \n\n<b>Кэш</b>: часть памяти, используемая как кэщ для чтения файлов с диска. По умолчанию не отображается на графике.
+        \n\n<b>Порог</b>: пороговое значение параметра <b>Доступ. память</b>, на котором система сочтет количество свободной памяти низким и начнет завершать фоновые сервисы и
+        различные не-системные процессы. Данный параметр представлен только в Android и отсутствует в Linux.
+        \n\nБолее подробная информация об использовании памяти:
+        \n<b>В Android:</b>
+                  \n- http://developer.android.com/tools/debugging/debugging-memory.html
+                  \n- http://developer.android.com/reference/android/app/ActivityManager.MemoryInfo.html
+        \n<b>В Linux:</b>
+                  \n- https://en.wikipedia.org/wiki/Procfs
+                  \n- https://www.kernel.org/doc/Documentation/filesystems/proc.txt
+        \n\n<big><b>Запись</b></big>
+        \n\nAnotherMonitor может записывать данные об использовании CPU и памяти в CSV файл. Для начала записи нажмите круглую красную кнопку в основном окне программы.
+        Далее нажатием кнопки \'Выбрать другие процессы\' вы можете выбрать или добавить дополнительные процессы для мониторинга.
+        AnotherMonitor будет осуществлять мониторинг каждого приложения все время его работы.
+        Для остановки записи используйте белую квадратную кнопку или нажмите кнопку уведомления \'Остановить и сохранить\'.
+        Значения будут записаны в файл с интервалом, определяемым параметром \'Интервал чтения\' на панели настроек.
+        \n\nПри записи AnotherMonitor сохраняет все параметры об использовании памяти и CPU независимо от того, показаны ли они на графике или нет.
+        \n\nФайлы сохраняются в папке \'AnotherMonitor\' во внутренней памяти вашего устройства.</string>
+  <string name="menu_record">Запись</string>
+  <string name="menu_record_description">Запускает в фоновом режиме процесс записи данных об использовании CPU и памяти</string>
+  <string name="menu_record_stop_description">Останавливает запись и сохраняет данные в CSV файл</string>
+  <string name="menu_stop_record">Остановить и сохранить</string>
+  <string name="menu_settings_description">Открывает панель настроек</string>
+  <string name="menu_help">Помощь</string>
+  <string name="menu_about">О программе</string>
+  <string name="menu_close">Закрыть</string>
+  <string name="button_ok">OK</string>
+  <string name="button_cancel">Отмена</string>
+  <string name="button_reset">Значения по умолчанию</string>
+  <string name="graphic_update_interval">Интервал обновления</string>
+  <string name="graphic_paused">График приостановлен</string>
+  <string name="graphic_recording">Запись&#8230;</string>
+  <string name="interval_read">Интервал чтения:</string>
+  <string name="interval_update">Интервал обновления:</string>
+  <string name="interval_width">Ширина интервала на графике:</string>
+  <string name="tab_main">Основное</string>
+  <string name="tab_main_text">Задайте частоту, с которой происходит чтение параметров памяти и CPU, частоту обновления меток на графике и ширину интервала.
+	    \n\nИнтервал обновления должен быть равен или превышать интервал чтения. При изменении интервала чтения происходит сброс состояния графика.</string> <!--  The higher values, the less resources consumed. -->
+  <string name="tab_main_alert_text">Интервал обновления должен быть равен или превышать интервал чтения. Измените интервалы или сбросьте настройки к значениям по умолчанию.</string>
+  <string name="tab_main_alert_title">Эй!</string>
+  <string name="tab_main_alert_ok">OK</string>
+  <string name="tab_show">Показать/Запись</string>
+  <string name="tab_show_text">Выберите параметры для отображения на графике.
+	    Данные параметры соответствуют аналогичным, записываемым в файл при мониторинге.
+	    \n\nСозданные CSV файлы сохраняются в папку \'data/data/org.anothermonitor/files\'.
+	    \n\nТакже вы можете включать или отключать данные параметры нажатием на название параметра в основном окне.</string>
+  <string name="tab_show_select_all">Выбрать все</string>
+  <string name="tab_show_unselect_all">Отменить выбор</string>
+  <string name="read_interval_text">Читать данные каждые:</string>
+  <string name="read_interval_prompt">Интервал чтения (сек):</string>
+  <string-array name="read_interval_array">
+    <item>0.5 сек</item>
+    <item>1 сек</item>
+    <item>2 сек</item>
+    <item>4 сек</item>
+  </string-array>
+  <string name="update_interval_text">Обновлять метки и график каждые:</string>
+  <string name="update_interval_prompt">Интервал обновления (сек):</string>
+  <string-array name="update_interval_array">
+    <item>1 сек</item>
+    <item>2 сек</item>
+    <item>4 сек</item>
+    <item>8 сек</item>
+  </string-array>
+  <string name="width_interval_text">Ширина интервала на графике:</string>
+  <string name="width_interval_prompt">Ширина интервала (dp):</string>
+  <string-array name="width_interval_array">
+    <item>1 dp</item>
+    <item>2 dp</item>
+    <item>5 dp</item>
+    <item>10 dp</item>
+  </string-array>
+  <string name="p_cpuusage">Исп. CPU</string>
+  <string name="p_cputotalusage">Суммарное исп. CPU</string>
+  <string name="p_cpuanothermonitor">AnotherMonitor</string>
+  <string name="p_memtotal">Память</string>
+  <string name="p_memused">Исп. память</string>
+  <string name="p_memavailable">Доступ. память</string>
+  <string name="p_memfree">Своб. память</string>
+  <string name="p_cached">Кэш</string>
+  <string name="p_threshold">Порог</string>
+  <string name="p_kb">- Кб</string>
+  <string name="p_percentage">-%</string>
+  <string name="about_title">О приложении</string>
+  <string name="about_text_title">
+		<big><b>AnotherMonitor</b> v3.1.0</big>
+		\nhttps://github.com/AntonioRedondo/AnotherMonitor
+		\n\n© 2010&#8211;2017 Antonio Redondo
+		\nhttp://antonioredondo.com
+		\n\nОпубликовано под лицензией
+		\nGNU General Public License v3
+		\n\nЧак Норрис одобряет это приложение.</string>
+  <string name="about_text">
+		\n\nAnotherMonitor отображает и записывает данные об использовании CPU и памяти на устройствах под управлением Android.
+		\n\nЧак Норрис одобряет это приложение.
+	</string>
+  <string name="about_feedback_text">Написать или отредактировать отзыв:</string>
+  <string name="about_feedback_button">AnotherMonitor в Google Play</string>
+  <string name="about_gnugpl_text">GNU General Public License v3</string>
+  <string name="about_gnugpl_link">https://gnu.org/licenses/gpl.html</string>
+  <string name="cd_paramter_status_icon">Иконка уведомления</string>
+  <string name="content_description_logo_app">Логотип</string>
+</resources>
