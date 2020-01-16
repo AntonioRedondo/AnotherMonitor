@@ -1,35 +1,20 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
-    }
-}
 apply plugin: 'com.android.application'
 
-repositories {
-    jcenter()
-    maven {
-        url "https://maven.google.com"
-    }
-}
-
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25'
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
 
     defaultConfig {
         applicationId "org.anothermonitor"
         minSdkVersion 16
-        targetSdkVersion 25
+        targetSdkVersion 29
         versionCode 9
         versionName "3.1.0"
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_6
-        targetCompatibility JavaVersion.VERSION_1_6
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     buildTypes {
         release {
@@ -40,7 +25,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-compat:25.3.1'
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile 'com.jaredrummler:android-processes:1.0.9'
+    implementation 'com.jaredrummler:android-processes:1.1.1'
+    implementation "androidx.core:core:1.1.0"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
 }

@@ -43,8 +43,6 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.*;
 import android.os.Process;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.*;
 import android.widget.Button;
@@ -56,6 +54,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 
 public class ActivityMain extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
 	

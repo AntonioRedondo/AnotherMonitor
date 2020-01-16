@@ -7,7 +7,8 @@
   <string name="notify_read2">Чтение данных в фоновом режиме</string>
   <string name="notify_record">AnotherMonitor записывает данные</string>
   <string name="notify_record2">Запись данных в фоновом режиме</string>
-  <string name="notify_toast_saved">сохранено в папке</string>
+    <string name="notification_channel_description">@string/notify_read</string>
+    <string name="notify_toast_saved">сохранено в папке</string>
   <string name="notify_toast_error">При сохранении CSV файла возникла ошибка:</string>
   <string name="notify_toast_error_2">Не удалось начать запись:</string>
   <string name="w_main_choose_process">Выбрать другие процессы</string>
