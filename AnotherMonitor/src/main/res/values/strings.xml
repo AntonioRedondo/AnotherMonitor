@@ -7,6 +7,7 @@
 	<string name="notify_read2">Reading values in the background</string>
 	<string name="notify_record">AnotherMonitor is recording values</string>
 	<string name="notify_record2">Recording values in the background</string>
+	<string name="notification_channel_description">@string/notify_read</string>
 	<string name="notify_toast_saved">saved in the folder</string>
 	<string name="notify_toast_error">An error happened when saving the CSV file:</string>
 	<string name="notify_toast_error_2">It hasn\'t been possible to start recording:</string>
