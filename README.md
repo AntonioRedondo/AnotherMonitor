@@ -7,6 +7,9 @@
 
 AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 
+## ANOTHERMONITOR IS IN LOW DEVELOPMENT STATUS
+**But not dead by any means.** April 2020 update: since Android 7.0 the app functionality has been seriously hampered. But it can still be useful for some folks out there. I'm planning to maintain the app in the long term. I also reply to issues and welcome pull requests. 😃
+
 ## Download ready-to-use app
 
 The app is released on Google Play: https://play.google.com/store/apps/details?id=org.anothermonitor.
