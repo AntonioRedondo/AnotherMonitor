@@ -1,67 +1,79 @@
-# AnotherMonitor
+# MoniTrack
 
 .
 <img src="https://lh4.ggpht.com/gfwMh4Ih0VD0AaxI8_eh11m6CRu_zSW6-U6F25AjCdlUjCkliWHBgJMhDb3ePdl_EMoT" width="180px" />
 <img src="https://lh4.ggpht.com/fugTTF9i76nsfnpWfv34xe1Xz5u4dDWOqbTYkBaPrzud4zPuYIZtQQhEyH7pX9POjYU" width="180px" />
 <img src="https://lh5.ggpht.com/96BmklbBOEOgL5mmXZQkofwswLGEzY4Zf6EirtF2nOBgf_cTo86RxuzCInv7etIfNgTO" width="180px" />
 
-AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 
-## ANOTHERMONITOR IS IN LOW DEVELOPMENT STATUS
-**But not dead by any means.** April 2020 update: since Android 7.0 the app functionality has been seriously hampered. But it can still be useful for some folks out there. I'm planning to maintain the app in the long term. I also reply to issues and welcome pull requests. 😃
+## How it works
+The <big><b>MoniTrack</b></big>app allows you to monitor and track CPU and Memory Usage of processes of your choice. In addition, you can:
+\n
+\n	<b>- View System Statistics</b>
+\n	<b>- View Battery Statistics</b>
+\n	<b>- Record CPU and Memory Tracking</b>
+\n	<b>- Load Records</b>
+\n	<b>- Store Record and Upload to Dropbox</b>
+\n	<b>- Kill Processes</b>
+\n
+\n	<big><b>Action bar</b></big>\n\n
+	This is the bar at the top. It consists of the application\'s name, a record/stop button and a three-dot dropdown.
 
-## Download ready-to-use app
+	Record/Stop button: start/stop recording of CPU and Memory tracking. Once stopped, a csv is saved in the DropSync folder allocated by your Dropbox application.
 
-The app is released on Google Play: https://play.google.com/store/apps/details?id=org.anothermonitor.
+	Three-dot dropdown: Navigate to other pages of the application other than the home screen, including this help guide.
 
-## IMPORTANT NOTICE for Android 7.0+ users
+\n\n
+	<big><b>Home Screen</b></big>\n\n
 
-Due to undocumented changes made by Google, on Android 7.0 CPU usage information for processes others than the own AnotherMonitor one will not be available (not even with root access). Rest of the app will work normally. For devices with Android 8.0 AnotherMonitor will not even show the CPU usage of the own app process. Read the below [Retriving processes info since Android 7.0](#retrieving-processes-info-since-android-nougat-70-api-24-august-2016) for more info.
+	The Home Screen consists of three panels:
+		Process Panel, Memory Panel, and Graph Panel.\n
 
-## Details
+\n\n	<big><b>Process Panel</b></big>\n\n
 
-AnotherMonitor shows the device CPU and memory status in real time.
+	This lists all the processes being tracked. Click \"Add Process\" to add other running processes to the list and track them. You will see the name as well as the Process ID (denoted by Pid).
 
-It has two main options:
-- It shows a chart and several labels wherein the values of the CPU and memory usage are updated every 0.5, 1, 2 or 4 seconds.
-- It can record on a CSV file the read values for a later usage on a spreadsheet program.
+	Click on the Memory or CPU Usage button in the top right to toggle between displaying the memory and cpu values of the processes.
 
-When AnotherMonitor is running on the background it consumes little resources. Then it can monitor and record the CPU and memory usage of other applications on the foreground.
+	If the device has multiple cores, it displays the combined aggregate.
+\n\n
+	<big><b>Memory Panel</b></big>\n\n
 
-AnotherMonitor adds a *Record* and *Close* button to the AnotherMonitor entry on the notification drawer.
+	This shows the device\'s memory parameters.
 
-#### How CPU and memory usage are obtained
+	\n	<b>Used Memory:</b> Memory currently in use.\n
 
-In order to get the CPU usage the app does NOT make use of the [`top`](https://en.wikipedia.org/wiki/Top_(software)) command from Linux but instead it parses `/proc/stat` and rest of process folders from the [`procfs`](https://en.wikipedia.org/wiki/Procfs) file system and work out the calculations with the user and system time. This is implemented on [`ServiceReader.class`](https://github.com/AntonioRedondo/AnotherMonitor/blob/master/AnotherMonitor/src/main/java/org/anothermonitor/ServiceReader.java#L259). Find more information about this on [Calculating CPU usage of a process in Linux - Stack Overflow](http://stackoverflow.com/questions/1420426/calculating-cpu-usage-of-a-process-in-linux).
+	\n	<b>Available Memory:</b> Memory available. It is equivalent to \"Free Memory\" + \"Cached Memory\".\n
 
-#### About multi-core devices
+	\n		<b>Free Memory:</b> The amount of memory currently free for use.\n
 
-The app does not support showing values for a specific core in multi-core devices. It will show an average of all the device's cores.
+	\n		<b>Cached Memory:</b>the in-memory cache.\n
 
-#### Retrieving processes info since Android Lollipop 5.1 (API 22, March 2015)
+	\n		<b>Limit:</b> Android\'s set limit for Available Memory at which it is too low and gets killed by Android. This is not native to Linux.
+	\n\n
 
-For devices running Android 5.1.1 it is not possible any more to retrieve the processes list with [`ActivityManager.getRunningAppProcesses()`](http://developer.android.com/reference/android/app/ActivityManager.html#getRunningAppProcesses%28%29). This change has not been documented anywhere on the official documentation nor an alternative way to retrieve the list has been provided. Thankfully the community at Stack Overflow came out with some [satisfying solution](http://stackoverflow.com/questions/30619349/android-5-1-1-and-above-getrunningappprocesses-returns-my-application-packag). For devices with Android 5.1 AnotherMonitor now uses the unofficial [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses) library to retrieve the processes list. The drawback of this is that for some processes there is no way to retrieve the app name nor the icon and instead only the long package name is shown.
+	<big><b>Graph Panel</b></big>\n\n
 
-#### Retrieving processes info since Android Nougat 7.0 (API 24, August 2016)
+	The graph shows the cpu and memory usage over time. If you click on the rec button at the top, you can start recording the graph values. Upon clicking the button again, you can stop recording and the csv will be saved to your device and DropboxSync.
 
-In Android 7.0 Google once again has made undocumented changes and has significantly restricted access to the `proc` file system. This means that since this new API level it is not possible anymore to retrieve processes info. AnotherMonitor running on devices with Android 7.0 will only show total CPU usage, AnotherMonitor CPU usage and memory usage, but not CPU usage for other processes. Running the app on a rooted device does not make difference. More info on [File system changes in Android Nougat - Stack Overflow](https://stackoverflow.com/questions/38590140/file-system-changes-in-android-nougat). [Star this Android issue](https://issuetracker.google.com/issues/37091475) to push Google to implement an alternative API.
+\n\n	<big><b>System Stats</b></big>\n\n
+	This lists operating system statistics by effectively running shell commands and displaying the output. The <b>"TOP"</b> button will run "top" and the <b>"CPU Info"</b> button will display the CPU information and the <b>"Device Info"</b> will display the information about the device.
 
+	\n\n<big><b>Battery Stats</b></big>\n\n
+	This lists battery statistics by reading from system files (in sys/class/power_supply/battery). You can see
 
-#### Retrieving processes info since Android Oreo 8.0 (API 26, August 2017)
-
-In Android 8.0 Google has further restricted access to the `proc` file system. Until now it was possible to at least get process info of the process running AnotherMonitor and total CPU usage. This does not work any more. AnotherMonitor running on devices with Android 8.0 will only show memory usage, but not total CPU usage or CPU usage for any process, including the own app process. Running the app on a rooted device does not make difference.
-
-
-## Resolving dependencies
-
-AnotherMonitor only has one external dependency, [AndroidProcesses](https://github.com/jaredrummler/AndroidProcesses). It is used to retrieve the device processes list and populate the 'Processes' screen.
-
-See the [Gradle](https://github.com/AntonioRedondo/AnotherMonitor/blob/master/AnotherMonitor/build.gradle) file for more details.
-
-## Contribute!
-
-If you have an awesome pull request no matter whether it's a big or small change, send it over! Your link to your GitHub account will be added below.
-
-## License
-
-AnotherMonitor makes use of the [GNU GPL v3.0](http://choosealicense.com/licenses/gpl-3.0/) license. Remember to make public your project source code when reusing AnotherMonitor code.
+	\n	<b>Battery Status:</b> Whether it is charging or not
+	\n	<b>Battery Capacity:</b> Maximum power compared to when first manufactured
+	\n	<b>Battery Health:</b> How well does the battery perform
+	\n	<b>Battery Technology:</b> The technology of the battery
+\n
+	You can click "Power Usage Summary" to go to the summary of your power usage from your system.
+\n\n
+	<big><b>Records</b></big>\n\n
+	Click on "Load Recording" to open a file picker. Open a previously saved csv file of a tracking record and it will be displayed.
+\n\n
+	<big><b>Kill Process</b></big>\n\n
+	You can enter the package name of the process in the textbox and the application
+	will kill the process with that name by using a system service. You can click
+	on "View Running Processes" to see System Stats and find the names of running
+		processes with package names.	</string>
