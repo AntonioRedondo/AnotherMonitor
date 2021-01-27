@@ -2,7 +2,7 @@
 
 <img src="SS/2.png" height="400px" /><img src="SS/6.png" height="400px"/><img src="SS/3.png" height="400px"/>
 <img src="SS/1.png" height="400px"/><img src="SS/0.png" height="400px"/>
-<img src="SS/dropbox.jpeg" width="500px" />
+<img src="SS/dropbox.jpeg" width="600px" />
 
 
 ## How it works ##
