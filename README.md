@@ -1,4 +1,4 @@
-# MoniTrack
+# MoniTrack #
 
 .
 <img src="https://lh4.ggpht.com/gfwMh4Ih0VD0AaxI8_eh11m6CRu_zSW6-U6F25AjCdlUjCkliWHBgJMhDb3ePdl_EMoT" width="180px" />
@@ -6,9 +6,9 @@
 <img src="https://lh5.ggpht.com/96BmklbBOEOgL5mmXZQkofwswLGEzY4Zf6EirtF2nOBgf_cTo86RxuzCInv7etIfNgTO" width="180px" />
 
 
-## How it works
+## How it works ##
 
-###MoniTrackapp allows you to monitor and track CPU and Memory Usage of processes of your choice. In addition, you can:
+MoniTrackapp allows you to monitor and track CPU and Memory Usage of processes of your choice. In addition, you can:
 
 * View System Statistics
 * View Battery Statistics
@@ -17,7 +17,7 @@
 * Store Record and Upload to Dropbox
 * Kill Processes
 
-	##Action bar##
+	## Action bar ##
 	This is the bar at the top. It consists of the application's name, a record/stop button and a three-dot dropdown.
 
 	Record/Stop button: start/stop recording of CPU and Memory tracking. Once stopped, a csv is saved in the DropSync folder allocated by your Dropbox application.
@@ -60,8 +60,8 @@
 	##System Stats
 	This lists operating system statistics by effectively running shell commands and displaying the output. The ###"TOP"### button will run "top" and the ###"CPU Info" button will display the CPU information and the ###"Device Info" will display the information about the device.
 
-	##Battery Stats
-	This lists battery statistics by reading from system files (in sys/class/power_supply/battery). You can see
+	##Battery Stats##
+	This lists battery statistics by reading from system files (in sys/class/power_supply/battery). You can see:
 
 	*Battery Status: Whether it is charging or not
 	*Battery Capacity: Maximum power compared to when first manufactured
