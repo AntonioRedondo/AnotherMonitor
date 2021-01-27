@@ -1,11 +1,11 @@
 # MoniTrack #
 
 .
-<img src="SS/2.png height="200px" />
+<img src="SS/2.png />
 <img src="SS/6.png" />
 <img src="SS/3.png" />
 <img src="SS/1.png" />
-<img src="SS/dropbox.jpeg" width="180px" />
+<img src="SS/dropbox.jpeg" />
 
 
 ## How it works ##
