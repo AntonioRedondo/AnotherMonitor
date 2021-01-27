@@ -17,7 +17,7 @@ MoniTrackapp allows you to monitor and track CPU and Memory Usage of processes o
 * Store Record and Upload to Dropbox
 * Kill Processes
 
-	## Action bar ##
+	<h1>  Action bar </h1>
 	This is the bar at the top. It consists of the application's name, a record/stop button and a three-dot dropdown.
 
 	Record/Stop button: start/stop recording of CPU and Memory tracking. Once stopped, a csv is saved in the DropSync folder allocated by your Dropbox application.
