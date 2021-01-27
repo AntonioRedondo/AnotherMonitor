@@ -7,73 +7,74 @@
 
 
 ## How it works
-The <big><b>MoniTrack</b></big>app allows you to monitor and track CPU and Memory Usage of processes of your choice. In addition, you can:
-\n
-\n	<b>- View System Statistics</b>
-\n	<b>- View Battery Statistics</b>
-\n	<b>- Record CPU and Memory Tracking</b>
-\n	<b>- Load Records</b>
-\n	<b>- Store Record and Upload to Dropbox</b>
-\n	<b>- Kill Processes</b>
-\n
-\n	<big><b>Action bar</b></big>\n\n
-	This is the bar at the top. It consists of the application\'s name, a record/stop button and a three-dot dropdown.
+
+###MoniTrackapp allows you to monitor and track CPU and Memory Usage of processes of your choice. In addition, you can:
+
+* View System Statistics
+* View Battery Statistics
+* Record CPU and Memory Tracking
+* Load Records
+* Store Record and Upload to Dropbox
+* Kill Processes
+
+	##Action bar##
+	This is the bar at the top. It consists of the application's name, a record/stop button and a three-dot dropdown.
 
 	Record/Stop button: start/stop recording of CPU and Memory tracking. Once stopped, a csv is saved in the DropSync folder allocated by your Dropbox application.
 
 	Three-dot dropdown: Navigate to other pages of the application other than the home screen, including this help guide.
 
-\n\n
-	<big><b>Home Screen</b></big>\n\n
+
+	##Home Screen
 
 	The Home Screen consists of three panels:
 		Process Panel, Memory Panel, and Graph Panel.\n
 
-\n\n	<big><b>Process Panel</b></big>\n\n
+	##Process Panel
 
-	This lists all the processes being tracked. Click \"Add Process\" to add other running processes to the list and track them. You will see the name as well as the Process ID (denoted by Pid).
+	This lists all the processes being tracked. Click "Add Process" to add other running processes to the list and track them. You will see the name as well as the Process ID (denoted by Pid).
 
 	Click on the Memory or CPU Usage button in the top right to toggle between displaying the memory and cpu values of the processes.
 
 	If the device has multiple cores, it displays the combined aggregate.
-\n\n
-	<big><b>Memory Panel</b></big>\n\n
 
-	This shows the device\'s memory parameters.
+	##Memory Panel
 
-	\n	<b>Used Memory:</b> Memory currently in use.\n
+	This shows the device's memory parameters.
 
-	\n	<b>Available Memory:</b> Memory available. It is equivalent to \"Free Memory\" + \"Cached Memory\".\n
+	###Used Memory: Memory currently in use.
 
-	\n		<b>Free Memory:</b> The amount of memory currently free for use.\n
+	###Available Memory: Memory available. It is equivalent to "Free Memory" + "Cached Memory".
 
-	\n		<b>Cached Memory:</b>the in-memory cache.\n
+	###Free Memory: The amount of memory currently free for use.
 
-	\n		<b>Limit:</b> Android\'s set limit for Available Memory at which it is too low and gets killed by Android. This is not native to Linux.
-	\n\n
+	###Cached Memory:the in-memory cache.
 
-	<big><b>Graph Panel</b></big>\n\n
+	###Limit: Android\'s set limit for Available Memory at which it is too low and gets killed by Android. This is not native to Linux.
+	
+
+	##Graph Panel
 
 	The graph shows the cpu and memory usage over time. If you click on the rec button at the top, you can start recording the graph values. Upon clicking the button again, you can stop recording and the csv will be saved to your device and DropboxSync.
 
-\n\n	<big><b>System Stats</b></big>\n\n
-	This lists operating system statistics by effectively running shell commands and displaying the output. The <b>"TOP"</b> button will run "top" and the <b>"CPU Info"</b> button will display the CPU information and the <b>"Device Info"</b> will display the information about the device.
+	##System Stats
+	This lists operating system statistics by effectively running shell commands and displaying the output. The ###"TOP"### button will run "top" and the ###"CPU Info" button will display the CPU information and the ###"Device Info" will display the information about the device.
 
-	\n\n<big><b>Battery Stats</b></big>\n\n
+	##Battery Stats
 	This lists battery statistics by reading from system files (in sys/class/power_supply/battery). You can see
 
-	\n	<b>Battery Status:</b> Whether it is charging or not
-	\n	<b>Battery Capacity:</b> Maximum power compared to when first manufactured
-	\n	<b>Battery Health:</b> How well does the battery perform
-	\n	<b>Battery Technology:</b> The technology of the battery
-\n
+	*Battery Status: Whether it is charging or not
+	*Battery Capacity: Maximum power compared to when first manufactured
+	*Battery Health: How well does the battery perform
+	*Battery Technology: The technology of the battery
+
 	You can click "Power Usage Summary" to go to the summary of your power usage from your system.
-\n\n
-	<big><b>Records</b></big>\n\n
+
+	##Records
 	Click on "Load Recording" to open a file picker. Open a previously saved csv file of a tracking record and it will be displayed.
-\n\n
-	<big><b>Kill Process</b></big>\n\n
+
+	##Kill Process
 	You can enter the package name of the process in the textbox and the application
 	will kill the process with that name by using a system service. You can click
 	on "View Running Processes" to see System Stats and find the names of running
-		processes with package names.	</string>
+	processes with package names.	
