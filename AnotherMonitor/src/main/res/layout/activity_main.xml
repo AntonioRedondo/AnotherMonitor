@@ -7,7 +7,7 @@
 	    android:layout_height="match_parent"
 	    android:background="@color/GrayMyPlaces"
 	    android:orientation="vertical" >
-
+	    	
 	    <LinearLayout
 	        android:id="@+id/LTopBar"
 	        android:layout_width="match_parent"
@@ -16,18 +16,18 @@
 	        android:paddingLeft="20dp"
 	        android:paddingBottom="2dp"
 	        android:background="@color/bgTopBar" >
-
+	
 	        <TextView
 	            android:layout_width="match_parent"
 	        	android:layout_height="match_parent"
-				app:autoSizeTextType="uniform"
-				app:autoSizeMaxTextSize="25sp"
 	            android:layout_weight="1"
-				android:maxLines="1"
 	            android:gravity="center_vertical"
 	            android:text="@string/app_name"
+				android:maxLines="1"
+	            app:autoSizeTextType="uniform"
+				app:autoSizeMaxTextSize="25sp"
 	            android:textColor="@color/White" />
-
+	
 		    <ImageView
 	            android:id="@+id/LButtonRecord"
 		        android:layout_width="40dp"
@@ -43,41 +43,41 @@
 		        android:paddingLeft="6dp"
 		        android:paddingRight="12dp"
 		        android:src="@drawable/button_menu" />
-
+	        
 	    </LinearLayout>
-
+		
   	    <FrameLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="2dp"
 	        android:background="@color/bgTopBarUnderline" />
-
+ 	    
  	    <LinearLayout
 	    	style="@style/MainWindowArrangement"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent">
-
+			    
 			<FrameLayout
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"
 		        android:layout_weight="1" >
-
+	
 			    <ScrollView
 			        android:layout_width="match_parent"
 			        android:layout_height="match_parent"
 			        android:fillViewport="true" >
-
+			
 			        <LinearLayout
 			            android:layout_width="match_parent"
 			            android:layout_height="wrap_content"
 			            android:orientation="vertical"
 			            android:gravity="center"
 			        	android:paddingTop="15dp" >
-
+			            
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:layout_marginBottom="5dp"
 			                android:layout_height="45dp" >
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:layout_marginLeft="0dp"
@@ -86,7 +86,7 @@
 		            			android:textSize="22sp"
 			                	android:textStyle="bold"
 			                	android:singleLine="true" />
-
+	
 				            <Button
 				                android:id="@+id/BRemoveAll"
 				                android:layout_width="90dp"
@@ -97,7 +97,7 @@
 				                android:textAllCaps="false"
 				                android:visibility="gone"
 				                android:maxLines="1" />
-
+	
 				            <Button
 				                android:id="@+id/BMemory"
 				                android:layout_width="90dp"
@@ -108,31 +108,31 @@
 				                android:textAllCaps="false"
 				                android:maxLines="1" />
 			            </LinearLayout>
-
+			
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LCPUTotal" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVCPUTotalPS" />
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:text="@string/p_cputotalusage"
 			                    android:textColor="@color/process1" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVCPUTotalP"
 			                    android:text="@string/p_percentage"
 			                    android:textColor="@color/process1" />
 			            </LinearLayout>
-
+			            
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LCPUAM" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVCPUAMPS" />
@@ -142,11 +142,11 @@
 						        android:layout_height="30dp"
 						        android:layout_marginLeft="10dp"
 						        android:src="@drawable/icon" />
-
+	    
 							<LinearLayout
 							    style="@style/FirstColumn"
 							  	android:orientation="vertical"  >
-
+						
 							    <TextView
 									android:layout_width="match_parent"
 									android:layout_height="wrap_content"
@@ -154,19 +154,19 @@
 									android:textSize="16sp"
 									android:textStyle="bold"
 									android:textColor="@color/process2" />
-
+							
 							    <TextView
 									android:layout_width="match_parent"
 									android:layout_height="wrap_content"
 									android:textSize="13sp"
 									android:textColor="@color/VeryDarkGray" />
-
+							    
 							</LinearLayout>
-
+    
 							<LinearLayout
 							    style="@style/SecondColumn"
 							  	android:orientation="vertical"  >
-
+						
 							    <TextView
 			                    	android:id="@+id/TVCPUAMP"
 									android:layout_width="55dp"
@@ -176,7 +176,7 @@
 									android:textSize="16sp"
 			                    	android:textColor="@color/process2"
 									android:text="@string/p_percentage" />
-
+							
 							    <TextView
 							        android:id="@+id/TVMemoryAM"
 									android:layout_width="wrap_content"
@@ -184,16 +184,16 @@
 									android:gravity="right"
 									android:textSize="13sp"
 									android:textColor="@color/VeryDarkGray" />
-
+							    
 							</LinearLayout>
 			            </LinearLayout>
-
+			
 				        <LinearLayout
 				            android:id="@+id/LProcessContainer"
 				            android:layout_width="match_parent"
 				            android:layout_height="wrap_content"
 				            android:orientation="vertical" />
-
+	
 			            <Button
 			                android:id="@+id/BChooseProcess"
 			                android:layout_width="wrap_content"
@@ -209,12 +209,12 @@
 			                android:text="@string/w_main_choose_process"
 			                android:textSize="18sp"
 			                android:textAllCaps="false" />
-
+			            
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:layout_marginTop="10dp"
 			                android:layout_marginBottom="5dp" >
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:layout_marginLeft="0dp"
@@ -223,7 +223,7 @@
 		            			android:textSize="22sp"
 			                	android:textStyle="bold"
 			                	android:singleLine="true" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVMemTotal"
@@ -231,7 +231,7 @@
 		            			android:textColor="@color/shadow"
 		            			android:textSize="22sp"
 			                	android:textStyle="bold" />
-
+	
 				            <ToggleButton
 				                android:id="@+id/BHideMemory"
 				                android:layout_width="55dp"
@@ -243,122 +243,122 @@
 				                android:includeFontPadding="false"
 				                android:textAllCaps="false" />
 			            </LinearLayout>
-
+			
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LMemUsed" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVMemUsedS" />
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:text="@string/p_memused"
 			                    android:textColor="@color/Orange" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVMemUsed"
 			                    android:textColor="@color/Orange" />
-
+			
 			                <TextView
 			                	style="@style/ThirdColumn"
 			                    android:id="@+id/TVMemUsedP"
 			                    android:textColor="@color/Orange" />
 			            </LinearLayout>
-
+			
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LMemAvailable" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVMemAvailableS" />
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:text="@string/p_memavailable"
 			                    android:textColor="@color/Magenta" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVMemAvailable"
 			                    android:textColor="@color/Magenta" />
-
+			
 			                <TextView
 			                	style="@style/ThirdColumn"
 			                    android:id="@+id/TVMemAvailableP"
 			                    android:textColor="@color/Magenta" />
 			            </LinearLayout>
-
+			
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LMemFree" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVMemFreeS" />
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:text="@string/p_memfree"
 			                    android:textColor="#804000" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVMemFree"
 			                    android:textColor="#804000" />
-
+			
 			                <TextView
 			                	style="@style/ThirdColumn"
 			                    android:id="@+id/TVMemFreeP"
 			                    android:textColor="#804000" />
 			            </LinearLayout>
-
+			
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LCached" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVCachedS" />
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:text="@string/p_cached"
 			                    android:textColor="@color/blue" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVCached"
 			                    android:textColor="@color/blue" />
-
+			
 			                <TextView
 			                	style="@style/ThirdColumn"
 			                    android:id="@+id/TVCachedP"
 			                    android:textColor="@color/blue" />
 			            </LinearLayout>
-
+			
 			            <LinearLayout
 			                style="@style/ParameterRow"
 			                android:id="@+id/LThreshold"
 			                    android:paddingBottom="16dp" >
-
+			
 					        <ImageView
 			                	style="@style/ParameterStatusIcon"
 			                    android:id="@+id/IVThresholdS" />
-
+			
 			                <TextView
 			                	style="@style/FirstColumn"
 			                    android:text="@string/p_threshold"
 			                    android:textColor="@color/lime" />
-
+			
 			                <TextView
 			                	style="@style/SecondColumn"
 			                    android:id="@+id/TVThreshold"
 			                    android:textColor="@color/lime" />
-
+			
 			                <TextView
 			                	style="@style/ThirdColumn"
 			                    android:id="@+id/TVThresholdP"
@@ -366,49 +366,49 @@
 			            </LinearLayout>
 			        </LinearLayout>
 			    </ScrollView>
-
+			    
 				<FrameLayout
 			        android:layout_width="match_parent"
 			        android:layout_height="5dp"
 			        android:layout_gravity="top"
 			        android:background="@drawable/gradient_process_top" />
-
+			    
 				<FrameLayout
 			        android:layout_width="match_parent"
 			        android:layout_height="16dp"
 			        android:layout_gravity="bottom"
 			        android:background="@drawable/gradient_process" />
-
+			        
 			</FrameLayout>
-
+			    
 			<FrameLayout
 		        android:layout_width="match_parent"
 		        android:layout_height="match_parent"
 		        android:layout_weight="1" >
-
+		        		
 			    <org.anothermonitor.ViewGraphic
 			        android:id="@+id/ANGraphic"
 			        android:layout_width="match_parent"
 			        android:layout_height="match_parent" />
-
+			    
 				<FrameLayout
 			        android:id="@+id/LGraphicButton"
 			        android:layout_width="match_parent"
 			        android:layout_height="match_parent"
 			        android:background="@drawable/button_graphic"
 			        android:alpha="0.3" />
-
+			    
 				<FrameLayout
 				    style="@style/ViewGraphicTopShadow"
 			        android:layout_width="match_parent"
 			        android:layout_height="5dp"
 			        android:layout_gravity="top"
 			        android:background="@drawable/gradient_process_top" />
-
+			        
 			</FrameLayout>
-
+	    
 	    </LinearLayout>
-
+	
 	</LinearLayout>
 
 	<FrameLayout
@@ -422,34 +422,34 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
         	android:layout_gravity="center|bottom" /> -->
-
+				    
 		<LinearLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent"
 	    	android:layout_gravity="top"
 		    android:orientation="vertical"
 			android:background="@color/bgSettings" >
-
+	
 	 	    <FrameLayout
 		        android:layout_width="match_parent"
 		        android:layout_height="2dp"
 		        android:background="@color/bgSettingsUnderline" />
-
+	
 			<FrameLayout
 				android:id="@+id/LOK"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:background="@drawable/button_close_settings" >
-
+	
 			    <ImageView
 			        android:layout_width="50dp"
 			        android:layout_height="50dp"
 		        	android:layout_gravity="center|top"
 		        	android:alpha="0.5"
 			        android:src="@drawable/icon_angle_down" />
-
+	        
 			</FrameLayout>
-
+	    
 			<LinearLayout
 			    android:orientation="vertical"
 		        android:layout_width="match_parent"
@@ -457,39 +457,39 @@
 		        android:layout_gravity="top"
 		        android:paddingLeft="35dp"
 		        android:paddingRight="35dp" >
-
+	
 	            <TextView
 	                style="@style/TVInterval"
 				    android:id="@+id/TVIntervalRead"
 			    	android:layout_marginTop="15dp" />
-
+	
 				<SeekBar
 	                style="@style/SBInterval"
 				    android:id="@+id/SBIntervalRead" />
-
+	
 	            <TextView
 	                style="@style/TVInterval"
 				    android:id="@+id/TVIntervalUpdate" />
-
+	
 				<SeekBar
 	                style="@style/SBInterval"
 				    android:id="@+id/SBIntervalUpdate" />
-
+	
 	            <TextView
 	                style="@style/TVInterval"
 				    android:id="@+id/TVIntervalWidth" />
-
+	
 				<SeekBar
 	                style="@style/SBInterval"
 				    android:id="@+id/SBIntervalWidth"
 			    	android:paddingBottom="30dp" />
-
+			        
 			</LinearLayout>
-
+		        
 		</LinearLayout>
-
+    
 	</FrameLayout>
-
+	    
     <ViewStub
 	    android:id="@+id/VSWelcome"
 	    android:layout="@layout/layer_welcome"
@@ -497,7 +497,7 @@
 	    android:layout_height="wrap_content"
 		android:layout_gravity="bottom|center"
 		android:layout_marginBottom="35dp" />
-
+	    
     <ViewStub
 	    android:id="@+id/VSFirstTimeProcesses"
 	    android:layout="@layout/layer_hint"
@@ -505,7 +505,7 @@
 	    android:layout_height="wrap_content"
 		android:layout_gravity="bottom|center"
 		android:layout_marginBottom="35dp" />
-
+    
     <ViewStub
         style="@style/LFeedbackLayerWidth"
 	    android:id="@+id/VSFeedback"
@@ -513,7 +513,7 @@
 	    android:layout_height="wrap_content"
 		android:layout_gravity="bottom|center"
 		android:layout_marginBottom="35dp" />
-
+		    
 	<FrameLayout
 	    android:id="@+id/LNavigationBar"
 	    android:layout_width="match_parent"
