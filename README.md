@@ -7,7 +7,7 @@ AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 <img src="https://lh4.ggpht.com/fugTTF9i76nsfnpWfv34xe1Xz5u4dDWOqbTYkBaPrzud4zPuYIZtQQhEyH7pX9POjYU" width="180px" />
 <img src="https://lh5.ggpht.com/96BmklbBOEOgL5mmXZQkofwswLGEzY4Zf6EirtF2nOBgf_cTo86RxuzCInv7etIfNgTO" width="180px" />
 
-> **Warning** NOTICE for Android 7.0+ users
+> **Warning** for Android 7.0+ users
 > 
 > Due to undocumented changes made by Google, on Android 7.0 (August 2016) CPU usage information for processes others than the own AnotherMonitor one will not be available (not even with root access). Rest of the app will work normally. For devices with Android 8.0 (August 2017) AnotherMonitor will not even show the CPU usage of the own app process. Read the below [Retriving processes info since Android 7.0](#retrieving-processes-info-since-android-nougat-70-api-24-august-2016) for more info.
 
