@@ -17,7 +17,7 @@ AnotherMonitor monitors and records the CPU and memory usage of Android devices.
 1. [Details](#details)
    1. [How CPU and memory usage are obtained](#how-cpu-and-memory-usage-are-obtained)
    1. [About multi-core devices](#about-multi-core-devices)
-   1. [Retrieving processes info since Android Lollipop 5.1](#retrieving-processes-info-since-android-lollipop-51-api-22-march-2015)
+   1. [Retrieving processes info since Android 5.1](#retrieving-processes-info-since-android-lollipop-51-api-22-march-2015)
    1. [Retrieving processes info since Android 7.0](#retrieving-processes-info-since-android-nougat-70-api-24-august-2016)
    1. [Retrieving processes info since Android 8.0](#retrieving-processes-info-since-android-oreo-80-api-26-august-2017)
 1. [Contribute](#contribute)
